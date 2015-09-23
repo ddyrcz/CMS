@@ -1,15 +1,61 @@
 ﻿<Window x:Class="CMS.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viemodel="clr-namespace:CMS.ViewModel"
         Title="MainWindow"
         Width="525"
         Height="350">
 
+    <Window.DataContext>
+        <viemodel:TrucksViewModel />
+    </Window.DataContext>
     <Window.Resources>
 
         <Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
             <Setter Property="Margin" Value="10,10,10,10" />
         </Style>
+        <DataTemplate x:Key="TruckItemTemplate">
+            <StackPanel>
+                <TextBlock FontSize="32"
+                           FontWeight="ExtraBlack"
+                           Text="{Binding Path=Brand}" />
+                <TextBlock FontSize="16"
+                           FontStyle="Italic"
+                           Text="{Binding Path=RegistrationNumber}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ModeItemTemplate">
+            <TextBlock HorizontalAlignment="Stretch"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#374BFF"
+                       Style="{StaticResource ControlBaseStyle}"
+                       Text="{Binding}" />
+        </DataTemplate>
+
+        <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="_Border"
+                                CornerRadius="4"
+                                Opacity=".5"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="_Border" Property="Background" Value="#A96FC8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
 
     </Window.Resources>
 
@@ -31,22 +77,22 @@
         <!--  MODE SELECTOR  -->
         <ListBox Grid.RowSpan="2"
                  Grid.Column="1"
+                 HorizontalContentAlignment="Stretch"
+                 ItemContainerStyle="{StaticResource _ListBoxItemStyle}"
+                 ItemTemplate="{StaticResource ModeItemTemplate}"
                  ItemsSource="{Binding Modes}"
-                 SelectedItem="{Binding SelectedMode}"
+                 SelectedItem="{Binding SelectedMode,
+                                        Mode=TwoWay}"
                  Style="{StaticResource ControlBaseStyle}" />
 
         <!--  CARS  -->
-        <DataGrid Grid.RowSpan="3"
-                 Grid.Column="2"                 
+        <ListBox Grid.RowSpan="3"
+                 Grid.Column="2"
+                 ItemTemplate="{StaticResource TruckItemTemplate}"
                  ItemsSource="{Binding Trucks}"
-                 Style="{StaticResource ControlBaseStyle}" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="1*"/>
-                <DataGridTextColumn Header="Registration number" Binding="{Binding Path=RegistrationNumber}" Width="1*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                 SelectedItem="{Binding SelectedTruck}"
+                 Style="{StaticResource ControlBaseStyle}" />
 
-        <!--  MODE  -->
         <StackPanel Grid.Row="1" Style="{StaticResource ControlBaseStyle}">
             <TextBlock Text="Mode" />
             <Border Background="White"
@@ -54,13 +100,14 @@
                     BorderThickness="3"
                     CornerRadius="5">
                 <TextBlock HorizontalAlignment="Center"
-                           FontSize="24"                           
+                           FontSize="24"
                            FontStyle="Italic"
                            FontWeight="Bold"
                            Text="{Binding SelectedMode}" />
             </Border>
         </StackPanel>
-        
+
+        <!--  MODE  -->
         <!--  DETAIL VIEW  -->
         <Grid Grid.Row="2"
               Grid.ColumnSpan="2"
@@ -69,6 +116,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition Width="1.5*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.8*" />
@@ -81,20 +129,119 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock FontSize="18"
+
+            <TextBlock Margin="10,3"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="32"
                        FontWeight="Bold"
                        Text="Brand" />
+            <TextBox Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Text="{Binding SelectedTruck.Brand}" />
 
-            <TextBlock Grid.Row="1" Text="Registration number" />
+
+            <TextBlock Grid.Row="1"
+                       Margin="10,3"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Text="Registration number" />
+
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Text="{Binding SelectedTruck.RegistrationNumber}" />
+
+
             <Image Grid.Row="1"
                    Grid.RowSpan="7"
-                   Grid.Column="1" />
-            <TextBlock Grid.Row="2" Text="VIN number" />
-            <TextBlock Grid.Row="3" Text="Term technical research" />
-            <TextBlock Grid.Row="4" Text="Tacho legalization" />
-            <TextBlock Grid.Row="5" Text="List UDT" />
-            <TextBlock Grid.Row="6" Text="OC policy" />
-            <TextBlock Grid.Row="7" Text="AC policy" />
+                   Grid.Column="2" />
+
+
+            <TextBlock Grid.Row="2"
+                       Margin="10,3"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Text="VIN number" />
+            <DatePicker Grid.Row="2"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Text="{Binding SelectedTruck.VIN_Number}" />
+
+
+
+            <TextBlock Grid.Row="3"
+                       Margin="10,3"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Text="Term technical research" />
+            <DatePicker Grid.Row="3"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Text="{Binding SelectedTruck.TermTechnicalResearch}" />
+
+
+
+            <TextBlock Grid.Row="4"
+                       Margin="10,3"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Text="Tacho legalization" />
+            <DatePicker Grid.Row="4"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Text="{Binding SelectedTruck.TechLegalization}" />
+
+
+
+            <TextBlock Grid.Row="5"
+                       Margin="10,3"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Text="Lift UDT" />
+            <DatePicker Grid.Row="5"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Text="{Binding SelectedTruck.LiftUDT}" />
+
+
+
+            <TextBlock Grid.Row="6"
+                       Margin="10,3"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Text="OC policy" />
+            <DatePicker Grid.Row="6"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Text="{Binding SelectedTruck.OCPolicy}" />
+
+
+            <TextBlock Grid.Row="7"
+                       Margin="10,3"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Text="AC policy" />
+            <DatePicker Grid.Row="7"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Text="{Binding SelectedTruck.ACPolicy}" />
+
 
         </Grid>
 
