@@ -1,5 +1,4 @@
-﻿using CMS.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace CMS.ViewModel
     {
         #region Trucks
 
-        public ObservableCollection<CMSDatabaseConnector.Car> Trucks { get; set; }
+        public ObservableCollection<Car> Trucks { get; set; }
 
         public Car SelectedTruck
         {
