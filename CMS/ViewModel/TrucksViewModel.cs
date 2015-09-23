@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CMSDatabaseConnector;
 using System.Windows;
+using System.Diagnostics;
 
 namespace CMS.ViewModel
 {
@@ -72,7 +73,7 @@ namespace CMS.ViewModel
         {
             try
             {
-                Trucks = new ObservableCollection<CMSDatabaseConnector.Car>(Connector.GetAllCars());
+                Trucks = new ObservableCollection<Car>(Connector.GetAllCars());
             }
             catch (Exception ex)
             {
