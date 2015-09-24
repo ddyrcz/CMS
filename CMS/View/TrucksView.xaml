@@ -11,19 +11,21 @@
         <viemodel:TrucksViewModel />
     </Window.DataContext>
     <Window.Resources>
-
+        <BitmapImage x:Key="Logo" UriSource="c:\logo.png" />
         <converters:ModeToBooleanConverter x:Key="ModeToBooleanConverter" />
 
         <Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
             <Setter Property="Margin" Value="10,10,10,10" />
         </Style>
-        
-        <Style x:Key="BorderStyle" BasedOn="{StaticResource ControlBaseStyle}" TargetType="Border">
+
+        <Style x:Key="BorderStyle"
+               BasedOn="{StaticResource ControlBaseStyle}"
+               TargetType="Border">
             <Setter Property="BorderBrush" Value="#374BFF" />
             <Setter Property="BorderThickness" Value="5" />
             <Setter Property="CornerRadius" Value="5" />
         </Style>
-        
+
         <DataTemplate x:Key="TruckItemTemplate">
             <StackPanel>
                 <TextBlock FontSize="32"
@@ -82,7 +84,9 @@
         </Grid.RowDefinitions>
 
         <!--  LOGO  -->
-        <Image Style="{StaticResource ControlBaseStyle}" />
+        <Image Margin="35, 15"
+               Source="{StaticResource Logo}"
+               Stretch="Fill" />
 
         <!--  MODE SELECTOR  -->
         <ListBox Grid.RowSpan="2"
@@ -97,35 +101,41 @@
 
         <Border Grid.RowSpan="3"
                 Grid.Column="2"
-                
-                Style="{StaticResource BorderStyle}" 
-                >
+                Style="{StaticResource BorderStyle}">
             <!--  CARS  -->
             <ListBox ItemTemplate="{StaticResource TruckItemTemplate}"
                      ItemsSource="{Binding Trucks}"
-                     SelectedItem="{Binding SelectedTruck}"
-                     />
+                     SelectedItem="{Binding SelectedTruck}" />
         </Border>
-        <StackPanel Grid.Row="1" Style="{StaticResource ControlBaseStyle}">
-            <TextBlock Text="Mode" />
+        <DockPanel Grid.Row="1"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   Style="{StaticResource ControlBaseStyle}">
+            <TextBlock Margin="15,3"
+                       DockPanel.Dock="Top"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Text="Mode" />
             <Border Background="White"
                     BorderBrush="#A96FC8"
                     BorderThickness="3"
-                    CornerRadius="5">
+                    CornerRadius="5"
+                    DockPanel.Dock="Bottom">
                 <TextBlock HorizontalAlignment="Center"
-                           FontSize="24"
+                           VerticalAlignment="Center"
+                           FontSize="72"
                            FontStyle="Italic"
                            FontWeight="Bold"
                            Text="{Binding SelectedMode}" />
             </Border>
-        </StackPanel>
+        </DockPanel>
 
         <!--  MODE  -->
         <!--  DETAIL VIEW  -->
         <Border Grid.Row="2"
                 Grid.ColumnSpan="2"
                 Background="White"
-                Style="{StaticResource BorderStyle}" >
+                Style="{StaticResource BorderStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -143,7 +153,6 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-
                 <TextBlock Margin="10,3"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
@@ -151,12 +160,13 @@
                            FontWeight="Bold"
                            Text="Brand" />
                 <TextBox Grid.Column="1"
+                         Grid.ColumnSpan="2"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Center"
+                         FontSize="24"
                          IsEnabled="{Binding SelectedMode,
                                              Converter={StaticResource ModeToBooleanConverter}}"
                          Text="{Binding SelectedTruck.Brand}" />
-
 
                 <TextBlock Grid.Row="1"
                            Margin="10,3"
@@ -164,7 +174,6 @@
                            VerticalAlignment="Center"
                            FontSize="18"
                            Text="Registration number" />
-
                 <TextBox Grid.Row="1"
                          Grid.Column="1"
                          HorizontalAlignment="Stretch"
@@ -173,10 +182,15 @@
                                              Converter={StaticResource ModeToBooleanConverter}}"
                          Text="{Binding SelectedTruck.RegistrationNumber}" />
 
-
-                <Image Grid.Row="1"
-                       Grid.RowSpan="7"
-                       Grid.Column="2" />
+                <StackPanel Grid.Row="1"
+                            Grid.RowSpan="7"
+                            Grid.Column="2"
+                            
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Image Stretch="Fill" Source="{StaticResource Logo}" />
+                    <Button Content="Test buttn" />
+                </StackPanel>
 
 
                 <TextBlock Grid.Row="2"
@@ -193,8 +207,6 @@
                                              Converter={StaticResource ModeToBooleanConverter}}"
                          Text="{Binding SelectedTruck.VIN_Number}" />
 
-
-
                 <TextBlock Grid.Row="3"
                            Margin="10,3"
                            HorizontalAlignment="Right"
@@ -208,8 +220,6 @@
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
                             Text="{Binding SelectedTruck.TermTechnicalResearch}" />
-
-
 
                 <TextBlock Grid.Row="4"
                            Margin="10,3"
@@ -225,8 +235,6 @@
                                                 Converter={StaticResource ModeToBooleanConverter}}"
                             Text="{Binding SelectedTruck.TechLegalization}" />
 
-
-
                 <TextBlock Grid.Row="5"
                            Margin="10,3"
                            HorizontalAlignment="Right"
@@ -240,8 +248,6 @@
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
                             Text="{Binding SelectedTruck.LiftUDT}" />
-
-
 
                 <TextBlock Grid.Row="6"
                            Margin="10,3"
@@ -257,7 +263,6 @@
                                                 Converter={StaticResource ModeToBooleanConverter}}"
                             Text="{Binding SelectedTruck.OCPolicy}" />
 
-
                 <TextBlock Grid.Row="7"
                            Margin="10,3"
                            HorizontalAlignment="Right"
@@ -271,8 +276,6 @@
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
                             Text="{Binding SelectedTruck.ACPolicy}" />
-
-
             </Grid>
         </Border>
     </Grid>

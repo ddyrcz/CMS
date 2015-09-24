@@ -73,7 +73,7 @@ namespace CMS.ViewModel
         {
             try
             {
-                Trucks = new ObservableCollection<Car>(Connector.GetAllCars());
+                Trucks = new ObservableCollection<Car>(Connector.GetAllCars());                
             }
             catch (Exception ex)
             {
