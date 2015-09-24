@@ -28,11 +28,11 @@ namespace CMS.ViewModel
                 {
                     _selectedCar = value;
                     SelectedTruckChanged();
-                    OnPropertyChanged("SelectedTruck");                    
+                    OnPropertyChanged("SelectedTruck");
                 }
             }
         }
-        
+
         private Car _selectedCar;
 
         #endregion
@@ -49,7 +49,7 @@ namespace CMS.ViewModel
                     Mode.Edit,
                     Mode.Add,
                     Mode.Remove
-                };                
+                };
             }
         }
 
@@ -71,19 +71,14 @@ namespace CMS.ViewModel
 
         public TrucksViewModel()
         {
-            try
-            {
-                Trucks = new ObservableCollection<Car>(Connector.GetAllCars());                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            Trucks = new ObservableCollection<Car>(Connector.GetAllCars());
         }
 
-        private void SelectedTruckChanged()
+        public void SaveData()
         {
-            
+            if (SelectedTruck == null) return;
+
+            Connector.UpdateCar(SelectedTruck);
         }
     }
 
