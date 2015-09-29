@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using CMSDatabaseConnector;
 using System.Windows;
 using System.Diagnostics;
+using CMS.Common.Enums;
+using CMS.ViewModel.Base;
+using CMS.Common.Interfaces;
 
 namespace CMS.ViewModel
 {
-    class TrucksViewModel : BaseViewModel
+    class TrucksViewModel : EditableViewModel
     {
         #region Trucks
 
@@ -27,15 +30,15 @@ namespace CMS.ViewModel
                 if (value != _selectedCar)
                 {
                     _selectedCar = value;
-                    SelectedTruckChanged();
                     OnPropertyChanged("SelectedTruck");
+                    OnSelectedTruckChanged();
                 }
             }
         }
 
         private Car _selectedCar;
 
-        #endregion
+        #endregion       
 
         #region Modes
 
@@ -53,40 +56,38 @@ namespace CMS.ViewModel
             }
         }
 
-        public Mode SelectedMode
-        {
-            get
-            {
-                return _selectedMode;
-            }
-            set
-            {
-                _selectedMode = value;
-                OnPropertyChanged("SelectedMode");
-            }
-        }
-        private Mode _selectedMode;
-
         #endregion
 
         public TrucksViewModel()
         {
             Trucks = new ObservableCollection<Car>(Connector.GetAllCars());
         }
+      
 
-        public void SaveData()
+        private void OnSelectedTruckChanged()
+        {
+            SelectedMode = Mode.Read;
+        }
+
+        protected override void SaveData()
         {
             if (SelectedTruck == null) return;
 
             Connector.UpdateCar(SelectedTruck);
         }
-    }
 
-    enum Mode
-    {
-        Read,
-        Edit,
-        Add,
-        Remove,
-    }
+        protected override void CreateData()
+        {
+            
+        }
+
+        private Car FromViewModelToEntity()
+        {
+            var car = new Car();
+
+            
+
+            return car;
+        }
+    }   
 }

@@ -76,8 +76,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Converters\ModeToBooleanConverter.cs" />
-    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="Common\Enums\Mode.cs" />
+    <Compile Include="ViewModel\Base\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Base\EditableViewModel.cs" />
     <Compile Include="ViewModel\StartupViewModel.cs" />
     <Compile Include="ViewModel\TrucksViewModel.cs" />
     <Compile Include="View\StartupView.xaml.cs">
@@ -117,6 +120,7 @@
     <Resource Include="logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Common\Interfaces\" />
     <Folder Include="Recources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

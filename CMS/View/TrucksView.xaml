@@ -13,6 +13,7 @@
     <Window.Resources>
         <BitmapImage x:Key="Logo" UriSource="c:\logo.png" />
         <converters:ModeToBooleanConverter x:Key="ModeToBooleanConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
         <Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
             <Setter Property="Margin" Value="10,10,10,10" />
@@ -26,14 +27,16 @@
             <Setter Property="CornerRadius" Value="5" />
         </Style>
 
-        <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ControlBaseStyle}">
-            <Setter Property="MinWidth" Value="70"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#374BFF"/>
+        <Style x:Key="ButtonStyle"
+               BasedOn="{StaticResource ControlBaseStyle}"
+               TargetType="Button">
+            <Setter Property="MinWidth" Value="70" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#374BFF" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontWeight" Value="Bold" />
-            
+
         </Style>
 
         <DataTemplate x:Key="TruckItemTemplate">
@@ -109,10 +112,10 @@
                                         Mode=TwoWay}"
                  Style="{StaticResource ControlBaseStyle}" />
 
+        <!--  CARS  -->
         <Border Grid.RowSpan="3"
                 Grid.Column="2"
                 Style="{StaticResource BorderStyle}">
-            <!--  CARS  -->
             <ListBox ItemTemplate="{StaticResource TruckItemTemplate}"
                      ItemsSource="{Binding Trucks}"
                      SelectedItem="{Binding SelectedTruck}" />
@@ -282,15 +285,15 @@
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
                             Text="{Binding SelectedTruck.ACPolicy}" />
-                
+
                 <Button Grid.Row="7"
                         Grid.Column="2"
-                        Style="{StaticResource ButtonStyle}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
-                        
                         Content="Save"
-                        />
+                        Style="{StaticResource ButtonStyle}"
+                        Visibility="{Binding SaveData,
+                                             Converter={StaticResource BoolToVisibilityConverter}}" />
 
             </Grid>
         </Border>

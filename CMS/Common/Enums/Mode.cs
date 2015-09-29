@@ -1,13 +1,16 @@
-﻿using CMS.ViewModel.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CMS.ViewModel
+namespace CMS.Common.Enums
 {
-    class StartupViewModel : BaseViewModel
+    enum Mode
     {
+        Read,
+        Edit,
+        Add,
+        Remove,
     }
 }
