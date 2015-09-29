@@ -1,6 +1,7 @@
 ﻿using CMS.Common.Enums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace CMS.ViewModel.Base
 {
     abstract class EditableViewModel : BaseViewModel
     {
+        public event EventHandler<SelectedModeEventArgs> SelectedModeChanged;
 
         protected void EditData()
         {
@@ -60,6 +62,8 @@ namespace CMS.ViewModel.Base
             }
         }
 
+        #region Modes
+
         public Mode SelectedMode
         {
             get
@@ -72,9 +76,48 @@ namespace CMS.ViewModel.Base
                 {
                     _selectedMode = value;
                     OnPropertyChanged("SelectedMode");
+                    OnPropertyChanged("CanSaveData");
+                    OnSelectedModeChanged(new SelectedModeEventArgs(value));
                 }
             }
         }
-        private Mode _selectedMode = Mode.Read;
+
+        private void OnSelectedModeChanged(SelectedModeEventArgs e)
+        {
+            EventHandler<SelectedModeEventArgs> selectedModeChanged = SelectedModeChanged;
+
+            if (selectedModeChanged != null)
+            {
+                selectedModeChanged.BeginInvoke(this, e, null, null);
+            }
+        }
+
+        private Mode _selectedMode = Mode.Read;        
+
+        public ObservableCollection<Mode> Modes
+        {
+            get
+            {
+                return new ObservableCollection<Mode>
+                {
+                    Mode.Read,
+                    Mode.Edit,
+                    Mode.Add,
+                    Mode.Remove
+                };
+            }
+        }
+
+        #endregion
+    }
+
+    class SelectedModeEventArgs : EventArgs
+    {
+        public Mode SelectedMode { get; private set; }
+
+        public SelectedModeEventArgs(Mode mode)
+        {
+            SelectedMode = mode;
+        }
     }
 }

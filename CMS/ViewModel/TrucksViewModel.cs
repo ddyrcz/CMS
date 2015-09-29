@@ -9,7 +9,6 @@ using System.Windows;
 using System.Diagnostics;
 using CMS.Common.Enums;
 using CMS.ViewModel.Base;
-using CMS.Common.Interfaces;
 
 namespace CMS.ViewModel
 {
@@ -38,31 +37,24 @@ namespace CMS.ViewModel
 
         private Car _selectedCar;
 
-        #endregion       
-
-        #region Modes
-
-        public ObservableCollection<Mode> Modes
-        {
-            get
-            {
-                return new ObservableCollection<Mode>
-                {
-                    Mode.Read,
-                    Mode.Edit,
-                    Mode.Add,
-                    Mode.Remove
-                };
-            }
-        }
-
         #endregion
 
         public TrucksViewModel()
         {
             Trucks = new ObservableCollection<Car>(Connector.GetAllCars());
+            base.SelectedModeChanged += TrucksViewModel_SelectedModeChanged;
         }
-      
+
+        void TrucksViewModel_SelectedModeChanged(object sender, SelectedModeEventArgs e)
+        {
+            if (e == null) return;
+
+            if (e.SelectedMode == Mode.Add)
+            {
+                _selectedCar = new Car();
+                OnPropertyChanged("SelectedTruck");
+            }
+        }       
 
         private void OnSelectedTruckChanged()
         {
@@ -78,16 +70,7 @@ namespace CMS.ViewModel
 
         protected override void CreateData()
         {
-            
+            Connector.AddCar(SelectedTruck);
         }
-
-        private Car FromViewModelToEntity()
-        {
-            var car = new Car();
-
-            
-
-            return car;
-        }
-    }   
+    }
 }

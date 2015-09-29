@@ -4,8 +4,8 @@
         xmlns:converters="clr-namespace:CMS.Common.Converters"
         xmlns:viemodel="clr-namespace:CMS.ViewModel"
         Title="MainWindow"
-        Width="525"
-        Height="350">
+        Width="Auto"
+        Height="Auto">
 
     <Window.DataContext>
         <viemodel:TrucksViewModel />
@@ -228,7 +228,7 @@
                             VerticalAlignment="Center"
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
-                            Text="{Binding SelectedTruck.TermTechnicalResearch}" />
+                            SelectedDate="{Binding SelectedTruck.TermTechnicalResearch}" />
 
                 <TextBlock Grid.Row="4"
                            Margin="10,3"
@@ -242,7 +242,7 @@
                             VerticalAlignment="Center"
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
-                            Text="{Binding SelectedTruck.TechLegalization}" />
+                            SelectedDate="{Binding SelectedTruck.TechLegalization}" />
 
                 <TextBlock Grid.Row="5"
                            Margin="10,3"
@@ -256,7 +256,7 @@
                             VerticalAlignment="Center"
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
-                            Text="{Binding SelectedTruck.LiftUDT}" />
+                            SelectedDate="{Binding SelectedTruck.LiftUDT}" />
 
                 <TextBlock Grid.Row="6"
                            Margin="10,3"
@@ -270,7 +270,7 @@
                             VerticalAlignment="Center"
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
-                            Text="{Binding SelectedTruck.OCPolicy}" />
+                            SelectedDate="{Binding SelectedTruck.OCPolicy}" />
 
                 <TextBlock Grid.Row="7"
                            Margin="10,3"
@@ -284,7 +284,7 @@
                             VerticalAlignment="Center"
                             IsEnabled="{Binding SelectedMode,
                                                 Converter={StaticResource ModeToBooleanConverter}}"
-                            Text="{Binding SelectedTruck.ACPolicy}" />
+                            SelectedDate="{Binding SelectedTruck.ACPolicy}" />
 
                 <Button Grid.Row="7"
                         Grid.Column="2"
@@ -292,7 +292,7 @@
                         VerticalAlignment="Center"
                         Content="Save"
                         Style="{StaticResource ButtonStyle}"
-                        Visibility="{Binding SaveData,
+                        Visibility="{Binding CanSaveData,
                                              Converter={StaticResource BoolToVisibilityConverter}}" />
 
             </Grid>
