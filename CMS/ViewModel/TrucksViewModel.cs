@@ -60,7 +60,7 @@ namespace CMS.ViewModel
         }
 
         public override void InitData()
-        {            
+        {
             Trucks = new ObservableCollection<Car>(Connector.GetAllCars());
             base.SelectedModeChanged -= TrucksViewModel_SelectedModeChanged;
             base.SelectedModeChanged += TrucksViewModel_SelectedModeChanged;
@@ -75,7 +75,7 @@ namespace CMS.ViewModel
             {
                 _selectedCar = new Car();
                 OnPropertyChanged("SelectedTruck");
-            }
+            }            
         }       
 
         private void OnSelectedTruckChanged()
@@ -95,11 +95,16 @@ namespace CMS.ViewModel
             Connector.AddCar(SelectedTruck);
         }
 
+        protected override void RemoveData()
+        {
+            Connector.RemoveCar(SelectedTruck.CarID);
+        }
+
         private Car GetSelectedCar(int carId)
         {
             if (carId < 0) return null;
 
             return Connector.GetSelectedCar(carId);
-        }
+        }        
     }
 }

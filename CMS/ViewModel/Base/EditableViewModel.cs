@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CMS.ViewModel.Base
 {
@@ -21,16 +22,18 @@ namespace CMS.ViewModel.Base
                 case Mode.Add: CreateData();
                     break;
                 case Mode.Edit: SaveData();
-                    break;
+                    break;                
                 default: return;
             }
 
             InitData();
-        }        
+        }
 
         abstract protected void SaveData();
 
         abstract protected void CreateData();
+
+        abstract protected void RemoveData();
 
         /// <summary>
         /// Indicates if there was any changes
@@ -63,7 +66,7 @@ namespace CMS.ViewModel.Base
                     SelectedMode == Mode.Edit;
             }
         }
-        
+
         public virtual void InitData()
         {
 
@@ -79,12 +82,19 @@ namespace CMS.ViewModel.Base
             }
             set
             {
-                if (_selectedMode != value)
+                _selectedMode = value;
+                OnPropertyChanged("SelectedMode");
+                OnPropertyChanged("CanSaveData");
+                OnSelectedModeChanged(new SelectedModeEventArgs(value));
+
+                if (value == Mode.Remove)
                 {
-                    _selectedMode = value;
-                    OnPropertyChanged("SelectedMode");
-                    OnPropertyChanged("CanSaveData");
-                    OnSelectedModeChanged(new SelectedModeEventArgs(value));
+                    if (MessageBox.Show("Czy napewno chcesz dokonać usunięcia?", "Usuwanie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        RemoveData();
+                        InitData();
+                    }
+
                 }
             }
         }
@@ -99,7 +109,7 @@ namespace CMS.ViewModel.Base
             }
         }
 
-        private Mode _selectedMode = Mode.Read;        
+        private Mode _selectedMode = Mode.Read;
 
         public ObservableCollection<Mode> Modes
         {
