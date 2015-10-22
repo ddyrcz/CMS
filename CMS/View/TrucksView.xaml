@@ -28,15 +28,14 @@
         </Style>
 
         <Style x:Key="ButtonStyle"
-               BasedOn="{StaticResource ControlBaseStyle}"
+              
                TargetType="Button">
             <Setter Property="MinWidth" Value="70" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Background" Value="#374BFF" />
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#303030" />
+            <Setter Property="Foreground" Value="White" />            
             <Setter Property="FontWeight" Value="Bold" />
-
         </Style>
 
 
@@ -152,12 +151,13 @@
         <!--  DETAIL VIEW  -->
         <Border Grid.Row="2"
                 Grid.ColumnSpan="2"
+                Padding="30"
                 Style="{StaticResource BorderStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
-                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="1.5*" />                    
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1.8*" />
@@ -167,7 +167,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition />                                        
                 </Grid.RowDefinitions>
 
                 <TextBlock Margin="10,3"
@@ -293,6 +293,7 @@
                         Grid.Column="2"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
+                        Margin="0,0,20,0"
                         Click="Save_Click"
                         Content="Save"
                         Style="{StaticResource ButtonStyle}"
