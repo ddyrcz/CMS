@@ -16,7 +16,22 @@ namespace CMS.ViewModel
     {
         #region Trucks
 
-        public ObservableCollection<Car> Trucks { get; set; }
+        public ObservableCollection<Car> Trucks
+        {
+            get
+            {
+                return _trucks;
+            }
+            set
+            {
+                if (_trucks != value)
+                {
+                    _trucks = value;
+                    OnPropertyChanged("Trucks");
+                }
+            }
+        }
+        private ObservableCollection<Car> _trucks;
 
         public Car SelectedTruck
         {
@@ -28,12 +43,12 @@ namespace CMS.ViewModel
             {
                 if (value != _selectedCar)
                 {
-                    _selectedCar = value;
+                    _selectedCar = GetSelectedCar(value != null ? value.CarID : -1);
                     OnPropertyChanged("SelectedTruck");
                     OnSelectedTruckChanged();
                 }
             }
-        }
+        }        
 
         private Car _selectedCar;
 
@@ -41,13 +56,20 @@ namespace CMS.ViewModel
 
         public TrucksViewModel()
         {
+            
+        }
+
+        public override void InitData()
+        {            
             Trucks = new ObservableCollection<Car>(Connector.GetAllCars());
+            base.SelectedModeChanged -= TrucksViewModel_SelectedModeChanged;
             base.SelectedModeChanged += TrucksViewModel_SelectedModeChanged;
+
         }
 
         void TrucksViewModel_SelectedModeChanged(object sender, SelectedModeEventArgs e)
         {
-            if (e == null) return;
+            if (e == null) return;            
 
             if (e.SelectedMode == Mode.Add)
             {
@@ -71,6 +93,13 @@ namespace CMS.ViewModel
         protected override void CreateData()
         {
             Connector.AddCar(SelectedTruck);
+        }
+
+        private Car GetSelectedCar(int carId)
+        {
+            if (carId < 0) return null;
+
+            return Connector.GetSelectedCar(carId);
         }
     }
 }

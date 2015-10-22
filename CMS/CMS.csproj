@@ -38,8 +38,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\CMSDatabaseConnector\CMSDatabaseConnector\CMSDatabaseConnector\bin\Debug\CMSDatabaseConnector.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework">
       <HintPath>..\..\..\CMSDatabaseConnector\CMSDatabaseConnector\CMSDatabaseConnector\bin\Debug\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -122,6 +121,9 @@
   <ItemGroup>
     <Folder Include="Common\Interfaces\" />
     <Folder Include="Recources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

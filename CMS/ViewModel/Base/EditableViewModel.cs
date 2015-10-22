@@ -12,7 +12,7 @@ namespace CMS.ViewModel.Base
     {
         public event EventHandler<SelectedModeEventArgs> SelectedModeChanged;
 
-        protected void EditData()
+        public void EditData()
         {
             Mode selectedMode = SelectedMode;
 
@@ -20,11 +20,13 @@ namespace CMS.ViewModel.Base
             {
                 case Mode.Add: CreateData();
                     break;
-                case Mode.Edit: EditData();
+                case Mode.Edit: SaveData();
                     break;
                 default: return;
             }
-        }
+
+            InitData();
+        }        
 
         abstract protected void SaveData();
 
@@ -61,6 +63,11 @@ namespace CMS.ViewModel.Base
                     SelectedMode == Mode.Edit;
             }
         }
+        
+        public virtual void InitData()
+        {
+
+        }
 
         #region Modes
 
@@ -88,7 +95,7 @@ namespace CMS.ViewModel.Base
 
             if (selectedModeChanged != null)
             {
-                selectedModeChanged.BeginInvoke(this, e, null, null);
+                selectedModeChanged.Invoke(this, e);
             }
         }
 

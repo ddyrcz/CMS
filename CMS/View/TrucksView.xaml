@@ -5,7 +5,8 @@
         xmlns:viemodel="clr-namespace:CMS.ViewModel"
         Title="MainWindow"
         Width="Auto"
-        Height="Auto">
+        Height="Auto"
+        Loaded="Window_Loaded">
 
     <Window.DataContext>
         <viemodel:TrucksViewModel />
@@ -16,14 +17,13 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
         <Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
-            <Setter Property="Margin" Value="10,10,10,10" />
+            <Setter Property="Margin" Value="15,15,15,15" />
         </Style>
 
         <Style x:Key="BorderStyle"
                BasedOn="{StaticResource ControlBaseStyle}"
                TargetType="Border">
-            <Setter Property="BorderBrush" Value="#374BFF" />
-            <Setter Property="BorderThickness" Value="5" />
+            <Setter Property="Background" Value="#808080" />
             <Setter Property="CornerRadius" Value="5" />
         </Style>
 
@@ -39,6 +39,8 @@
 
         </Style>
 
+
+
         <DataTemplate x:Key="TruckItemTemplate">
             <StackPanel>
                 <TextBlock FontSize="32"
@@ -52,18 +54,17 @@
 
         <DataTemplate x:Key="ModeItemTemplate">
             <TextBlock HorizontalAlignment="Stretch"
-                       FontSize="28"
+                       FontSize="34"
                        FontWeight="Bold"
-                       Foreground="#374BFF"
                        Style="{StaticResource ControlBaseStyle}"
                        Text="{Binding}" />
         </DataTemplate>
 
-        <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
+        <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border Name="_Border"
+                        <Border Name="Border"
                                 CornerRadius="4"
                                 Opacity=".5"
                                 Padding="2"
@@ -72,7 +73,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="true">
-                                <Setter TargetName="_Border" Property="Background" Value="#A96FC8" />
+                                <Setter TargetName="Border" Property="Background" Value="#303030" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -84,7 +85,7 @@
 
     </Window.Resources>
 
-    <Grid Background="#FF54C8E9">
+    <Grid Background="#303030">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -102,24 +103,29 @@
                Stretch="Fill" />
 
         <!--  MODE SELECTOR  -->
-        <ListBox Grid.RowSpan="2"
-                 Grid.Column="1"
-                 HorizontalContentAlignment="Stretch"
-                 ItemContainerStyle="{StaticResource _ListBoxItemStyle}"
-                 ItemTemplate="{StaticResource ModeItemTemplate}"
-                 ItemsSource="{Binding Modes}"
-                 SelectedItem="{Binding SelectedMode,
-                                        Mode=TwoWay}"
-                 Style="{StaticResource ControlBaseStyle}" />
+        <Border Grid.RowSpan="2"
+                Grid.Column="1"
+                Style="{StaticResource BorderStyle}">
+            <ListBox HorizontalContentAlignment="Stretch"
+                     Background="#808080"
+                     ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                     ItemTemplate="{StaticResource ModeItemTemplate}"
+                     ItemsSource="{Binding Modes}"
+                     SelectedItem="{Binding SelectedMode,
+                                            Mode=TwoWay}" />
+        </Border>
 
         <!--  CARS  -->
         <Border Grid.RowSpan="3"
                 Grid.Column="2"
                 Style="{StaticResource BorderStyle}">
-            <ListBox ItemTemplate="{StaticResource TruckItemTemplate}"
+            <ListBox Background="#808080"
+                     ItemTemplate="{StaticResource TruckItemTemplate}"
                      ItemsSource="{Binding Trucks}"
                      SelectedItem="{Binding SelectedTruck}" />
         </Border>
+
+
         <DockPanel Grid.Row="1"
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch"
@@ -129,11 +135,9 @@
                        FontSize="16"
                        FontWeight="Bold"
                        Text="Mode" />
-            <Border Background="White"
-                    BorderBrush="#A96FC8"
-                    BorderThickness="3"
-                    CornerRadius="5"
-                    DockPanel.Dock="Bottom">
+            <Border CornerRadius="5"
+                    DockPanel.Dock="Bottom"
+                    Style="{StaticResource BorderStyle}">
                 <TextBlock HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontSize="72"
@@ -143,11 +147,11 @@
             </Border>
         </DockPanel>
 
+
         <!--  MODE  -->
         <!--  DETAIL VIEW  -->
         <Border Grid.Row="2"
                 Grid.ColumnSpan="2"
-                Background="White"
                 Style="{StaticResource BorderStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -194,7 +198,6 @@
                          IsEnabled="{Binding SelectedMode,
                                              Converter={StaticResource ModeToBooleanConverter}}"
                          Text="{Binding SelectedTruck.RegistrationNumber}" />
-
 
                 <Image Grid.Row="1"
                        Grid.RowSpan="6"
@@ -290,6 +293,7 @@
                         Grid.Column="2"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
+                        Click="Save_Click"
                         Content="Save"
                         Style="{StaticResource ButtonStyle}"
                         Visibility="{Binding CanSaveData,

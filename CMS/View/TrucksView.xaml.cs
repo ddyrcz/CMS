@@ -27,5 +27,21 @@ namespace CMS
         {
             InitializeComponent();            
         }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is TrucksViewModel)
+            {
+                ((TrucksViewModel)this.DataContext).EditData();
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is TrucksViewModel)
+            {
+                ((TrucksViewModel)this.DataContext).InitData();
+            }
+        }
     }
 }
