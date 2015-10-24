@@ -75,6 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\Converters\BoolToBrushConverter.cs" />
     <Compile Include="Common\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Converters\ModeToBooleanConverter.cs" />
     <Compile Include="Common\Enums\Mode.cs" />

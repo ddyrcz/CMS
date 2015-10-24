@@ -15,6 +15,7 @@
         <BitmapImage x:Key="Logo" UriSource="c:\logo.png" />
         <converters:ModeToBooleanConverter x:Key="ModeToBooleanConverter" />
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:BoolToBrushConverter x:Key="BoolToBrushConverter" />
 
         <Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
             <Setter Property="Margin" Value="15,15,15,15" />
@@ -27,28 +28,26 @@
             <Setter Property="CornerRadius" Value="5" />
         </Style>
 
-        <Style x:Key="ButtonStyle"
-              
-               TargetType="Button">
+        <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="MinWidth" Value="70" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Background" Value="#303030" />
-            <Setter Property="Foreground" Value="White" />            
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
 
-
-
         <DataTemplate x:Key="TruckItemTemplate">
-            <StackPanel>
-                <TextBlock FontSize="32"
-                           FontWeight="ExtraBlack"
-                           Text="{Binding Path=Brand}" />
-                <TextBlock FontSize="16"
-                           FontStyle="Italic"
-                           Text="{Binding Path=RegistrationNumber}" />
-            </StackPanel>
+            <Border Padding="5" Background="{Binding Path=CrossedDeathLine, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#FF8C090C}">
+                <StackPanel >
+                    <TextBlock FontSize="32"
+                               FontWeight="ExtraBlack"
+                               Text="{Binding Path=Brand}" />
+                    <TextBlock FontSize="16"
+                               FontStyle="Italic"
+                               Text="{Binding Path=RegistrationNumber}" />
+                </StackPanel>
+            </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="ModeItemTemplate">
@@ -118,7 +117,8 @@
         <Border Grid.RowSpan="3"
                 Grid.Column="2"
                 Style="{StaticResource BorderStyle}">
-            <ListBox Background="#808080"
+            <ListBox HorizontalContentAlignment="Stretch"
+                     Background="#808080"
                      ItemTemplate="{StaticResource TruckItemTemplate}"
                      ItemsSource="{Binding Trucks}"
                      SelectedItem="{Binding SelectedTruck}" />
@@ -157,7 +157,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
-                    <ColumnDefinition Width="1.5*" />                    
+                    <ColumnDefinition Width="1.5*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1.8*" />
@@ -167,7 +167,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition />                                        
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <TextBlock Margin="10,3"
@@ -291,9 +291,9 @@
 
                 <Button Grid.Row="7"
                         Grid.Column="2"
+                        Margin="0,0,20,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
-                        Margin="0,0,20,0"
                         Click="Save_Click"
                         Content="Save"
                         Style="{StaticResource ButtonStyle}"
