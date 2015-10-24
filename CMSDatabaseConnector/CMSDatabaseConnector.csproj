@@ -51,6 +51,7 @@
     <Compile Include="Car.cs">
       <DependentUpon>CMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CarExtended.cs" />
     <Compile Include="CMSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -58,7 +58,7 @@ namespace CMSDatabaseConnector
                 throw ex;
             }
         }
-        
+
         /// <summary>
         /// Gets all cars from CMS database
         /// </summary>
@@ -71,15 +71,69 @@ namespace CMSDatabaseConnector
             {
                 using (CMSContext context = new CMSContext())
                 {
-                    cars = context.Cars.ToList();                                       
+                    cars = context.Cars.ToList();
+
+                    foreach (Car car in cars)
+                    {
+                        TrimDataSize(car);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
-            }                    
+            }
 
             return cars;
+        }
+
+        private static void TrimDataSize(Car car)
+        {            
+                // trimming registration number
+                if (car.RegistrationNumber != null)
+                {
+                    car.RegistrationNumber = car.RegistrationNumber.TrimEnd();
+                }
+
+                // trimming brand 
+                if (car.Brand != null)
+                {
+                    car.Brand =  car.Brand.TrimEnd();
+                }
+
+                // trimming vin number
+                if (car.VIN_Number != null)
+                {
+                    car.VIN_Number = car.VIN_Number.TrimEnd();
+                }                
+            
+        }
+
+        /// <summary>
+        /// Gets specified car object
+        /// </summary>
+        /// <param name="carId"></param>
+        /// <returns></returns>
+        public static Car GetSelectedCar(int carId)
+        {
+            Car car = null;
+
+            try
+            {
+                using (CMSContext context = new CMSContext())
+                {
+                    car = context.Cars.FirstOrDefault(x => x.CarID == carId);
+
+                    // for reducing white characters at the end
+                    TrimDataSize(car);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return car;
         }
 
         /// <summary>
@@ -98,7 +152,11 @@ namespace CMSDatabaseConnector
 
                     if (oldCar != null)
                     {
-                        context.Entry(oldCar).CurrentValues.SetValues(modifiedCar);
+                        // TODO: fond better solution
+                        CopyCarObject(modifiedCar, oldCar);
+
+                        // ---throws exception---
+                        //context.Entry(oldCar).CurrentValues.SetValues(modifiedCar);
                         context.SaveChanges();
                     }
                 }
@@ -107,6 +165,18 @@ namespace CMSDatabaseConnector
             {
                 throw ex;
             }
+        }
+
+        private static void CopyCarObject(Car modifiedCar, Car oldCar)
+        {
+            oldCar.Brand = modifiedCar.Brand;
+            oldCar.ACPolicy = modifiedCar.ACPolicy;
+            oldCar.LiftUDT = modifiedCar.LiftUDT;
+            oldCar.OCPolicy = modifiedCar.OCPolicy;
+            oldCar.RegistrationNumber = modifiedCar.RegistrationNumber;
+            oldCar.TechLegalization = modifiedCar.TechLegalization;
+            oldCar.VIN_Number = modifiedCar.VIN_Number;
+            oldCar.TermTechnicalResearch = modifiedCar.TermTechnicalResearch;
         }
     }
 }
