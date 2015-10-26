@@ -25,7 +25,38 @@ namespace CMS
     {        
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            FixDatePickerBackground();
+        }
+
+        private void FixDatePickersBackground()
+        {
+            TechnicalResearchDatePicker.Loaded += delegate
+            {
+                var textBox = (TextBox)TechnicalResearchDatePicker.Template.FindName("PART_TextBox", TechnicalResearchDatePicker);
+                textBox.Background = TechnicalResearchDatePicker.Background;
+            };
+            TachoLegalizationDatePicker.Loaded += delegate
+            {
+                var textBox = (TextBox)TachoLegalizationDatePicker.Template.FindName("PART_TextBox", TachoLegalizationDatePicker);
+                textBox.Background = TachoLegalizationDatePicker.Background;
+            };
+            LiftUDTDatePicker.Loaded += delegate
+            {
+                var textBox = (TextBox)LiftUDTDatePicker.Template.FindName("PART_TextBox", LiftUDTDatePicker);
+                textBox.Background = LiftUDTDatePicker.Background;
+            };
+            OCDatePicker.Loaded += delegate
+            {
+                var textBox = (TextBox)OCDatePicker.Template.FindName("PART_TextBox", OCDatePicker);
+                textBox.Background = OCDatePicker.Background;
+            };
+            ACDatePicker.Loaded += delegate
+            {
+                var textBox = (TextBox)ACDatePicker.Template.FindName("PART_TextBox", ACDatePicker);
+                textBox.Background = ACDatePicker.Background;
+            };
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
