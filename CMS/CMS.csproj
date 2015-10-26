@@ -63,6 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Common\Resources\CommonResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StartupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\Interfaces\" />
-    <Folder Include="Recources\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo1.png" />
