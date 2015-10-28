@@ -134,8 +134,7 @@ namespace CMS.ViewModel.Base
             {
                 selectedModeChanged.Invoke(this, e);
             }
-        }
-
+        }        
 
         /// <summary>
         /// Better would be to set read mode as a default, but then there are some errors while reparing date pickers background

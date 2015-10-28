@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="Common\Converters\BoolToBrushConverter.cs" />
     <Compile Include="Common\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Common\Converters\ModeLanguageConverter.cs" />
     <Compile Include="Common\Converters\ModeToBooleanConverter.cs" />
     <Compile Include="Common\Converters\OppositeBoolValueConverter.cs" />
     <Compile Include="Common\Converters\OppositeVisibilityValueConverter.cs" />
