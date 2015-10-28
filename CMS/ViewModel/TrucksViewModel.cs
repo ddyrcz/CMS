@@ -9,6 +9,7 @@ using System.Windows;
 using System.Diagnostics;
 using CMS.Common.Enums;
 using CMS.ViewModel.Base;
+using CMS.Common.Helpers;
 
 namespace CMS.ViewModel
 {
@@ -92,6 +93,12 @@ namespace CMS.ViewModel
 
         protected override void CreateData()
         {
+            if (!CarValidator.Validate(SelectedTruck))
+            {
+                MessageBox.Show("Marka i numer rejestracyjny musi być podany.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             Connector.AddCar(SelectedTruck);
         }
 
