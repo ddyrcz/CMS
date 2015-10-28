@@ -22,7 +22,7 @@ namespace CMS.ViewModel.Base
                 case Mode.Add: CreateData();
                     break;
                 case Mode.Edit: SaveData();
-                    break;                
+                    break;
                 default: return;
             }
 
@@ -67,9 +67,35 @@ namespace CMS.ViewModel.Base
             }
         }
 
+        /// <summary>
+        /// Indicates if editable mode is on
+        /// </summary>
+        public bool IsEditable
+        {
+            get
+            {
+                return
+                    (SelectedMode == Mode.Edit || SelectedMode == Mode.Add);
+            }
+        }
+
         public virtual void InitData()
         {
 
+        }
+
+        /// <summary>
+        /// Indicates if controls for editing are visible
+        /// </summary>
+        public Visibility EditVisible
+        {
+            get
+            {
+                return
+                    (SelectedMode == Mode.Edit ||SelectedMode == Mode.Add) ?
+                    Visibility.Visible :
+                    Visibility.Collapsed;
+            }
         }
 
         #region Modes
@@ -85,6 +111,8 @@ namespace CMS.ViewModel.Base
                 _selectedMode = value;
                 OnPropertyChanged("SelectedMode");
                 OnPropertyChanged("CanSaveData");
+                OnPropertyChanged("EditVisible");
+                OnPropertyChanged("IsEditable");
                 OnSelectedModeChanged(new SelectedModeEventArgs(value));
 
                 if (value == Mode.Remove)
@@ -94,7 +122,6 @@ namespace CMS.ViewModel.Base
                         RemoveData();
                         InitData();
                     }
-
                 }
             }
         }
@@ -109,7 +136,11 @@ namespace CMS.ViewModel.Base
             }
         }
 
-        private Mode _selectedMode = Mode.Read;
+
+        /// <summary>
+        /// Better would be to set read mode as a default, but then there are some errors while reparing date pickers background
+        /// </summary>
+        private Mode _selectedMode = Mode.Edit;
 
         public ObservableCollection<Mode> Modes
         {

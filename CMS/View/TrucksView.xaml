@@ -6,7 +6,10 @@
         Title="MainWindow"
         Width="Auto"
         Height="Auto"
-        Loaded="Window_Loaded">
+        KeyDown="Window_KeyDown"
+        Loaded="Window_Loaded"
+        WindowState="Maximized"
+        WindowStyle="None">
 
     <Window.DataContext>
         <viemodel:TrucksViewModel />
@@ -108,11 +111,9 @@
                            Text="Brand" />
                 <TextBox Grid.Column="1"
                          Grid.ColumnSpan="2"
-                         HorizontalAlignment="Stretch"
-                         VerticalAlignment="Center"
                          FontSize="24"
-                         IsEnabled="{Binding SelectedMode,
-                                             Converter={StaticResource ModeToBooleanConverter}}"
+                         IsReadOnly="{Binding IsEditable,
+                                              Converter={StaticResource OppositeBoolValueConverter}}"
                          Style="{StaticResource DetailControlStyle}"
                          Text="{Binding SelectedTruck.Brand}" />
 
@@ -124,10 +125,8 @@
                            Text="Registration number" />
                 <TextBox Grid.Row="1"
                          Grid.Column="1"
-                         HorizontalAlignment="Stretch"
-                         VerticalAlignment="Center"
-                         IsEnabled="{Binding SelectedMode,
-                                             Converter={StaticResource ModeToBooleanConverter}}"
+                         IsReadOnly="{Binding IsEditable,
+                                              Converter={StaticResource OppositeBoolValueConverter}}"
                          Style="{StaticResource DetailControlStyle}"
                          Text="{Binding SelectedTruck.RegistrationNumber}" />
 
@@ -145,10 +144,8 @@
                            Text="VIN number" />
                 <TextBox Grid.Row="2"
                          Grid.Column="1"
-                         HorizontalAlignment="Stretch"
-                         VerticalAlignment="Center"
-                         IsEnabled="{Binding SelectedMode,
-                                             Converter={StaticResource ModeToBooleanConverter}}"
+                         IsReadOnly="{Binding IsEditable,
+                                              Converter={StaticResource OppositeBoolValueConverter}}"
                          Style="{StaticResource DetailControlStyle}"
                          Text="{Binding SelectedTruck.VIN_Number}" />
 
@@ -158,15 +155,20 @@
                            VerticalAlignment="Center"
                            FontSize="18"
                            Text="Term technical research" />
+                <TextBox Grid.Row="3"
+                         Grid.Column="1"
+                         IsReadOnly="True"
+                         Style="{StaticResource DetailControlStyle}"
+                         Text="{Binding SelectedTruck.TermTechnicalResearch,
+                                        StringFormat=yyyy-MM-dd}"
+                         Visibility="{Binding EditVisible,
+                                              Converter={StaticResource OppositeVisibilityValueConverter}}" />
                 <DatePicker Name="TechnicalResearchDatePicker"
                             Grid.Row="3"
                             Grid.Column="1"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            IsEnabled="{Binding SelectedMode,
-                                                Converter={StaticResource ModeToBooleanConverter}}"
                             SelectedDate="{Binding SelectedTruck.TermTechnicalResearch}"
-                            Style="{StaticResource DetailControlStyle}" />
+                            Style="{StaticResource DetailControlStyle}"
+                            Visibility="{Binding EditVisible}" />
 
                 <TextBlock Grid.Row="4"
                            Margin="10,3"
@@ -174,15 +176,20 @@
                            VerticalAlignment="Center"
                            FontSize="18"
                            Text="Tacho legalization" />
-                <DatePicker Grid.Row="4"
-                            Name="TachoLegalizationDatePicker"
+                <TextBox Grid.Row="4"
+                         Grid.Column="1"
+                         IsReadOnly="True"
+                         Style="{StaticResource DetailControlStyle}"
+                         Text="{Binding SelectedTruck.TechLegalization,
+                                        StringFormat=yyyy-MM-dd}"
+                         Visibility="{Binding EditVisible,
+                                              Converter={StaticResource OppositeVisibilityValueConverter}}" />
+                <DatePicker Name="TachoLegalizationDatePicker"
+                            Grid.Row="4"
                             Grid.Column="1"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            IsEnabled="{Binding SelectedMode,
-                                                Converter={StaticResource ModeToBooleanConverter}}"
                             SelectedDate="{Binding SelectedTruck.TechLegalization}"
-                            Style="{StaticResource DetailControlStyle}" />
+                            Style="{StaticResource DetailControlStyle}"
+                            Visibility="{Binding EditVisible}" />
 
                 <TextBlock Grid.Row="5"
                            Margin="10,3"
@@ -190,15 +197,20 @@
                            VerticalAlignment="Center"
                            FontSize="18"
                            Text="Lift UDT" />
-                <DatePicker Grid.Row="5"
+                <TextBox Grid.Row="5"
+                         Grid.Column="1"
+                         IsReadOnly="True"
+                         Style="{StaticResource DetailControlStyle}"
+                         Text="{Binding SelectedTruck.LiftUDT,
+                                        StringFormat=yyyy-MM-dd}"
+                         Visibility="{Binding EditVisible,
+                                              Converter={StaticResource OppositeVisibilityValueConverter}}" />
+                <DatePicker Name="LiftUDTDatePicker"
+                            Grid.Row="5"
                             Grid.Column="1"
-                            Name="LiftUDTDatePicker"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            IsEnabled="{Binding SelectedMode,
-                                                Converter={StaticResource ModeToBooleanConverter}}"
                             SelectedDate="{Binding SelectedTruck.LiftUDT}"
-                            Style="{StaticResource DetailControlStyle}" />
+                            Style="{StaticResource DetailControlStyle}"
+                            Visibility="{Binding EditVisible}" />
 
                 <TextBlock Grid.Row="6"
                            Margin="10,3"
@@ -206,15 +218,20 @@
                            VerticalAlignment="Center"
                            FontSize="18"
                            Text="OC policy" />
-                <DatePicker Grid.Row="6"
+                <TextBox Grid.Row="6"
+                         Grid.Column="1"
+                         IsReadOnly="True"
+                         Style="{StaticResource DetailControlStyle}"
+                         Text="{Binding SelectedTruck.OCPolicy,
+                                        StringFormat=yyyy-MM-dd}"
+                         Visibility="{Binding EditVisible,
+                                              Converter={StaticResource OppositeVisibilityValueConverter}}" />
+                <DatePicker Name="OCDatePicker"
+                            Grid.Row="6"
                             Grid.Column="1"
-                            Name="OCDatePicker"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            IsEnabled="{Binding SelectedMode,
-                                                Converter={StaticResource ModeToBooleanConverter}}"
                             SelectedDate="{Binding SelectedTruck.OCPolicy}"
-                            Style="{StaticResource DetailControlStyle}" />
+                            Style="{StaticResource DetailControlStyle}"
+                            Visibility="{Binding EditVisible}" />
 
                 <TextBlock Grid.Row="7"
                            Margin="10,3"
@@ -222,15 +239,20 @@
                            VerticalAlignment="Center"
                            FontSize="18"
                            Text="AC policy" />
-                <DatePicker Grid.Row="7"
+                <TextBox Grid.Row="7"
+                         Grid.Column="1"
+                         IsReadOnly="True"
+                         Style="{StaticResource DetailControlStyle}"
+                         Text="{Binding SelectedTruck.ACPolicy,
+                                        StringFormat=yyyy-MM-dd}"
+                         Visibility="{Binding EditVisible,
+                                              Converter={StaticResource OppositeVisibilityValueConverter}}" />
+                <DatePicker Name="ACDatePicker"
+                            Grid.Row="7"
                             Grid.Column="1"
-                            Name="ACDatePicker"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            IsEnabled="{Binding SelectedMode,
-                                                Converter={StaticResource ModeToBooleanConverter}}"
                             SelectedDate="{Binding SelectedTruck.ACPolicy}"
-                            Style="{StaticResource DetailControlStyle}" />
+                            Style="{StaticResource DetailControlStyle}"
+                            Visibility="{Binding EditVisible}" />
 
                 <Button Grid.Row="7"
                         Grid.Column="2"

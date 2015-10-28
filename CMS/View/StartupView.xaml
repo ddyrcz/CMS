@@ -1,7 +1,11 @@
 ﻿<Window x:Class="CMS.View.StartupView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viemodel="clr-namespace:CMS.ViewModel"
         Title="StartupView" Height="300" Width="300">
+    <Window.DataContext>
+        <viemodel:StartupViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

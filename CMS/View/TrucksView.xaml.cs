@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CMSDatabaseConnector;
 using CMS.ViewModel;
+using CMS.ViewModel.Base;
 
 
 namespace CMS
@@ -31,32 +32,32 @@ namespace CMS
         }
 
         private void FixDatePickersBackground()
-        {
+        {            
             TechnicalResearchDatePicker.Loaded += delegate
-            {
+            {                
                 var textBox = (TextBox)TechnicalResearchDatePicker.Template.FindName("PART_TextBox", TechnicalResearchDatePicker);
-                textBox.Background = TechnicalResearchDatePicker.Background;
+                textBox.Background = TechnicalResearchDatePicker.Background;                
             };
             TachoLegalizationDatePicker.Loaded += delegate
-            {
+            {                
                 var textBox = (TextBox)TachoLegalizationDatePicker.Template.FindName("PART_TextBox", TachoLegalizationDatePicker);
-                textBox.Background = TachoLegalizationDatePicker.Background;
+                textBox.Background = TachoLegalizationDatePicker.Background;                
             };
             LiftUDTDatePicker.Loaded += delegate
-            {
+            {                
                 var textBox = (TextBox)LiftUDTDatePicker.Template.FindName("PART_TextBox", LiftUDTDatePicker);
-                textBox.Background = LiftUDTDatePicker.Background;
+                textBox.Background = LiftUDTDatePicker.Background;                
             };
             OCDatePicker.Loaded += delegate
-            {
+            {                
                 var textBox = (TextBox)OCDatePicker.Template.FindName("PART_TextBox", OCDatePicker);
-                textBox.Background = OCDatePicker.Background;
+                textBox.Background = OCDatePicker.Background;                
             };
             ACDatePicker.Loaded += delegate
-            {
+            {                
                 var textBox = (TextBox)ACDatePicker.Template.FindName("PART_TextBox", ACDatePicker);
-                textBox.Background = ACDatePicker.Background;
-            };
+                textBox.Background = ACDatePicker.Background;                
+            };            
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -72,6 +73,17 @@ namespace CMS
             if (this.DataContext is TrucksViewModel)
             {
                 ((TrucksViewModel)this.DataContext).InitData();
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e == null) return;
+
+            // Close application
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
             }
         }
     }

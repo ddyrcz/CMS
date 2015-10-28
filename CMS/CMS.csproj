@@ -82,6 +82,8 @@
     <Compile Include="Common\Converters\BoolToBrushConverter.cs" />
     <Compile Include="Common\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Converters\ModeToBooleanConverter.cs" />
+    <Compile Include="Common\Converters\OppositeBoolValueConverter.cs" />
+    <Compile Include="Common\Converters\OppositeVisibilityValueConverter.cs" />
     <Compile Include="Common\Enums\Mode.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Base\EditableViewModel.cs" />
