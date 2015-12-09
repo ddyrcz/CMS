@@ -17,7 +17,7 @@ namespace CMSService
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new CMSServiceWorker()
             };
             ServiceBase.Run(ServicesToRun);
         }

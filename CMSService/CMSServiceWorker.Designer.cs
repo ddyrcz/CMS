@@ -1,6 +1,6 @@
 ﻿namespace CMSService
 {
-    partial class Service1
+    partial class CMSServiceWorker
     {
         /// <summary> 
         /// Required designer variable.
