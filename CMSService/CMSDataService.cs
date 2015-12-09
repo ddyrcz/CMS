@@ -23,7 +23,7 @@ namespace CMSService
             _timer = new Timer();
 
             _timer.Enabled = true;
-            _timer.Interval = MILISECONDS_IN_TWO_HOURS;
+            _timer.Interval = 15000;
             _timer.Elapsed -= new ElapsedEventHandler(CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine);
             _timer.Elapsed += new ElapsedEventHandler(CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine);
         }        
