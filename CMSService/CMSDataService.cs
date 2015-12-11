@@ -23,7 +23,7 @@ namespace CMSService
             _timer = new Timer();
 
             _timer.Enabled = true;
-            _timer.Interval = 15000;
+            _timer.Interval = 25000;
             _timer.Elapsed -= new ElapsedEventHandler(CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine);
             _timer.Elapsed += new ElapsedEventHandler(CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine);
         }        
@@ -35,7 +35,10 @@ namespace CMSService
 
         private static void CMSDatabaseCrossedDeathLineHelper_CrossedDeathLineEventHandler()
         {
-            // message
+            using (WCFServiceClient service = new WCFServiceClient())
+            {
+                service.ShowMessageOnServerSide("Mniej niż 2 tygodnia do deathline!");               
+            }
         }
     }
 }

@@ -20,6 +20,12 @@ namespace CMSService.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFService/GetNumberOfCars", ReplyAction="http://tempuri.org/IWCFService/GetNumberOfCarsResponse")]
         System.Threading.Tasks.Task<int> GetNumberOfCarsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFService/ShowMessageOnServerSide", ReplyAction="http://tempuri.org/IWCFService/ShowMessageOnServerSideResponse")]
+        void ShowMessageOnServerSide(string msg);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFService/ShowMessageOnServerSide", ReplyAction="http://tempuri.org/IWCFService/ShowMessageOnServerSideResponse")]
+        System.Threading.Tasks.Task ShowMessageOnServerSideAsync(string msg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace CMSService.ServiceReference {
         
         public System.Threading.Tasks.Task<int> GetNumberOfCarsAsync() {
             return base.Channel.GetNumberOfCarsAsync();
+        }
+        
+        public void ShowMessageOnServerSide(string msg) {
+            base.Channel.ShowMessageOnServerSide(msg);
+        }
+        
+        public System.Threading.Tasks.Task ShowMessageOnServerSideAsync(string msg) {
+            return base.Channel.ShowMessageOnServerSideAsync(msg);
         }
     }
 }
