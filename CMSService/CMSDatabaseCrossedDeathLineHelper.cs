@@ -15,10 +15,10 @@ namespace CMSService
         public static event CrossedDeathLineDelegate CrossedDeathLineEventHandler;
 
         public static void CheckCrossedDeathLine(object source, ElapsedEventArgs e)
-        {            
+        {
             List<Car> cars = Connector.GetAllCars();
 
-            if(cars.Where(x => x.CrossedDeathLine).Any())
+            if (cars.Where(x => x.CrossedDeathLine).Any())
             {
                 OnCrossedDeathLine();
             }

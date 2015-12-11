@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="54e00e94-bfd9-49f8-af69-43d756948590" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="51810757-04b2-4ddd-ab81-f63bd802c108" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,9 +22,9 @@
     <MetadataSource Address="net.tcp://dawid:8080/WCFService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f9788692-e329-4e45-ab5b-c374abbb02a1" SourceId="1" SourceUrl="net.tcp://dawid:8080/WCFService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f844c718-b449-4211-93c6-cc8eedd5cd31" SourceId="1" SourceUrl="net.tcp://dawid:8080/WCFService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4a87f348-3ede-4dc7-acf1-31c4400527a7" SourceId="1" SourceUrl="net.tcp://dawid:8080/WCFService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="74b2d068-d297-420d-9f89-a013c1f22ead" SourceId="1" SourceUrl="net.tcp://dawid:8080/WCFService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="91a7b09f-656b-473f-a650-1569175c525c" SourceId="1" SourceUrl="net.tcp://dawid:8080/WCFService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="e0b6c951-083a-4452-ae19-5b894958c1d0" SourceId="1" SourceUrl="net.tcp://dawid:8080/WCFService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

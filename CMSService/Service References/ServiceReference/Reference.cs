@@ -12,63 +12,49 @@ namespace CMSService.ServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IWCFService")]
-    public interface IWCFService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IMessageMessenger")]
+    public interface IMessageMessenger {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFService/GetNumberOfCars", ReplyAction="http://tempuri.org/IWCFService/GetNumberOfCarsResponse")]
-        int GetNumberOfCars();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessageMessenger/ShowMessageOnServerSide", ReplyAction="http://tempuri.org/IMessageMessenger/ShowMessageOnServerSideResponse")]
+        void ShowMessageOnServerSide(string message, string caption);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFService/GetNumberOfCars", ReplyAction="http://tempuri.org/IWCFService/GetNumberOfCarsResponse")]
-        System.Threading.Tasks.Task<int> GetNumberOfCarsAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFService/ShowMessageOnServerSide", ReplyAction="http://tempuri.org/IWCFService/ShowMessageOnServerSideResponse")]
-        void ShowMessageOnServerSide(string msg);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFService/ShowMessageOnServerSide", ReplyAction="http://tempuri.org/IWCFService/ShowMessageOnServerSideResponse")]
-        System.Threading.Tasks.Task ShowMessageOnServerSideAsync(string msg);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessageMessenger/ShowMessageOnServerSide", ReplyAction="http://tempuri.org/IMessageMessenger/ShowMessageOnServerSideResponse")]
+        System.Threading.Tasks.Task ShowMessageOnServerSideAsync(string message, string caption);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IWCFServiceChannel : CMSService.ServiceReference.IWCFService, System.ServiceModel.IClientChannel {
+    public interface IMessageMessengerChannel : CMSService.ServiceReference.IMessageMessenger, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WCFServiceClient : System.ServiceModel.ClientBase<CMSService.ServiceReference.IWCFService>, CMSService.ServiceReference.IWCFService {
+    public partial class MessageMessengerClient : System.ServiceModel.ClientBase<CMSService.ServiceReference.IMessageMessenger>, CMSService.ServiceReference.IMessageMessenger {
         
-        public WCFServiceClient() {
+        public MessageMessengerClient() {
         }
         
-        public WCFServiceClient(string endpointConfigurationName) : 
+        public MessageMessengerClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public WCFServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public MessageMessengerClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public WCFServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MessageMessengerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public WCFServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MessageMessengerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public int GetNumberOfCars() {
-            return base.Channel.GetNumberOfCars();
+        public void ShowMessageOnServerSide(string message, string caption) {
+            base.Channel.ShowMessageOnServerSide(message, caption);
         }
         
-        public System.Threading.Tasks.Task<int> GetNumberOfCarsAsync() {
-            return base.Channel.GetNumberOfCarsAsync();
-        }
-        
-        public void ShowMessageOnServerSide(string msg) {
-            base.Channel.ShowMessageOnServerSide(msg);
-        }
-        
-        public System.Threading.Tasks.Task ShowMessageOnServerSideAsync(string msg) {
-            return base.Channel.ShowMessageOnServerSideAsync(msg);
+        public System.Threading.Tasks.Task ShowMessageOnServerSideAsync(string message, string caption) {
+            return base.Channel.ShowMessageOnServerSideAsync(message, caption);
         }
     }
 }
