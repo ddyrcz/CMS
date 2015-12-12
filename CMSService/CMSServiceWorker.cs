@@ -13,14 +13,14 @@ namespace CMSService
 
         protected override void OnStart(string[] args)
         {
-            CMSDataService.InitService();            
-            System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + "OnStart.txt");             
+            System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + "OnStart.txt");            
+            CMSDataService.InitService();
         }
 
         protected override void OnStop()
         {
-            CMSDataService.StopService();
             System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + "OnStop.txt");
+            CMSDataService.StopService();            
         }
     }
 }

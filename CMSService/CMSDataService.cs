@@ -1,5 +1,4 @@
-﻿using CMS_WCFServices;
-using CMSService.ServiceReference;
+﻿using CMSService.ServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,17 +13,19 @@ namespace CMSService
     static class CMSDataService
     {
         private static Timer _timer;
-        private static double MILISECONDS_IN_TWO_HOURS = 7200000;       
+        private static double MILISECONDS_IN_TWO_HOURS = 7200000;
+        private static int FIRST_RUN_DELAY = 60000; // one minute
 
         public static void InitService()
-        {            
+        {
+            System.Threading.Thread.Sleep(FIRST_RUN_DELAY);
+
             CMSDatabaseCrossedDeathLineHelper.CrossedDeathLineEventHandler += CMSDatabaseCrossedDeathLineHelper_CrossedDeathLineEventHandler;
             CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine(null, null);
 
-            _timer = new Timer();
+            _timer = new Timer(MILISECONDS_IN_TWO_HOURS);
 
-            _timer.Enabled = true;
-            _timer.Interval = 15000;
+            _timer.Enabled = true;            
             _timer.Elapsed -= new ElapsedEventHandler(CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine);
             _timer.Elapsed += new ElapsedEventHandler(CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine);
         }
@@ -38,7 +39,7 @@ namespace CMSService
         {            
             using (MessageMessengerClient service = new MessageMessengerClient())
             {
-                service.ShowMessageOnServerSide("Mniej niż 2 tygodnia do deathline!", string.Empty);                
+                service.ShowMessageOnServerSide("Mniej niż 2 tygodnia do przekroczenia terminu ważności!", "CMS");                
             }
         }
     }
