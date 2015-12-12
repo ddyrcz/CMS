@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace CMSDatabaseConnector
 {
@@ -33,7 +35,7 @@ namespace CMSDatabaseConnector
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -55,7 +57,7 @@ namespace CMSDatabaseConnector
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -81,32 +83,32 @@ namespace CMSDatabaseConnector
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return cars;
         }
 
         private static void TrimDataSize(Car car)
-        {            
-                // trimming registration number
-                if (car.RegistrationNumber != null)
-                {
-                    car.RegistrationNumber = car.RegistrationNumber.TrimEnd();
-                }
+        {
+            // trimming registration number
+            if (car.RegistrationNumber != null)
+            {
+                car.RegistrationNumber = car.RegistrationNumber.TrimEnd();
+            }
 
-                // trimming brand 
-                if (car.Brand != null)
-                {
-                    car.Brand =  car.Brand.TrimEnd();
-                }
+            // trimming brand 
+            if (car.Brand != null)
+            {
+                car.Brand = car.Brand.TrimEnd();
+            }
 
-                // trimming vin number
-                if (car.VIN_Number != null)
-                {
-                    car.VIN_Number = car.VIN_Number.TrimEnd();
-                }                
-            
+            // trimming vin number
+            if (car.VIN_Number != null)
+            {
+                car.VIN_Number = car.VIN_Number.TrimEnd();
+            }
+
         }
 
         /// <summary>
@@ -130,7 +132,7 @@ namespace CMSDatabaseConnector
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return car;
@@ -163,7 +165,7 @@ namespace CMSDatabaseConnector
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 

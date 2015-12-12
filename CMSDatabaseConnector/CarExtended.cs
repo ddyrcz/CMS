@@ -14,7 +14,7 @@ namespace CMSDatabaseConnector
         private double _daysInDeathLine = 14;
 
         /// <summary>
-        /// Indicates is any date (OC policy, AC polisy) cross over the death line date
+        /// Indicates is any date (OC policy, AC polisy) crossed over the death line date
         /// </summary>
         public bool CrossedDeathLine
         {
