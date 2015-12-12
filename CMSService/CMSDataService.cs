@@ -1,11 +1,5 @@
 ﻿using CMSService.ServiceReference;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace CMSService
@@ -14,18 +8,18 @@ namespace CMSService
     {
         private static Timer _timer;
         private static double MILISECONDS_IN_TWO_HOURS = 7200000;
-        private static int FIRST_RUN_DELAY = 60000; // one minute
+        private static int MILISECONDS_IN_THREE_MINUTES = 180000;    
 
         public static void InitService()
         {
-            System.Threading.Thread.Sleep(FIRST_RUN_DELAY);
+            FirstRunDelay();    
 
             CMSDatabaseCrossedDeathLineHelper.CrossedDeathLineEventHandler += CMSDatabaseCrossedDeathLineHelper_CrossedDeathLineEventHandler;
             CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine(null, null);
 
             _timer = new Timer(MILISECONDS_IN_TWO_HOURS);
 
-            _timer.Enabled = true;            
+            _timer.Enabled = true;
             _timer.Elapsed -= new ElapsedEventHandler(CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine);
             _timer.Elapsed += new ElapsedEventHandler(CMSDatabaseCrossedDeathLineHelper.CheckCrossedDeathLine);
         }
@@ -36,11 +30,16 @@ namespace CMSService
         }
 
         private static void CMSDatabaseCrossedDeathLineHelper_CrossedDeathLineEventHandler()
-        {            
+        {
             using (MessageMessengerClient service = new MessageMessengerClient())
             {
-                service.ShowMessageOnServerSide("Mniej niż 2 tygodnia do przekroczenia terminu ważności!", "CMS");                
+                service.ShowMessageOnServerSide("Mniej niż 2 tygodnia do przekroczenia terminu ważności!", "CMS");
             }
+        }
+
+        private static void FirstRunDelay()
+        {
+            System.Threading.Thread.Sleep(MILISECONDS_IN_THREE_MINUTES);
         }
     }
 }
