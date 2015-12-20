@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -16,8 +17,8 @@ namespace CMSDatabaseConnector
         /// <param name="newCar"></param>
         public static void AddCar(Car newCar)
         {
-            if (newCar == null) return;
-
+            if (newCar == null) return;     
+                   
             try
             {
                 using (CMSContext context = new CMSContext())
@@ -25,8 +26,8 @@ namespace CMSDatabaseConnector
                     int lastCarId = (
                         from car in context.Cars
                         orderby car.CarID descending
-                        select car.CarID).FirstOrDefault();
-
+                        select car.CarID).FirstOrDefault();  
+                                      
                     newCar.CarID = ++lastCarId;
 
                     context.Cars.Add(newCar);
@@ -167,6 +168,31 @@ namespace CMSDatabaseConnector
             {
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Tries to make a connection with a database
+        /// </summary>
+        /// <returns>True - connection succeed, False - connection failed</returns>
+        public static bool TryConnectToDB()
+        {
+            int count = 0;                   
+            while (true)
+            {
+                try
+                {
+                    using (CMSContext context = new CMSContext())
+                    {
+                        context.Cars.FirstOrDefault();
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+                    if (++count > 20) return false;           
+                    Thread.Sleep(30000);
+                }
+            }            
         }
 
         private static void CopyCarObject(Car modifiedCar, Car oldCar)
