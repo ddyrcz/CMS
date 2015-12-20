@@ -2,6 +2,7 @@
 using Nito.AsyncEx;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,20 @@ namespace CMSMessanger
 {
     class Program
     {
+        public static string CMSPath
+        {
+            get
+            {
+                if(_cmsPath == null)
+                {
+                    _cmsPath = ConfigurationManager.AppSettings["CMSAppPath"].ToString();
+                }
+
+                return _cmsPath;
+            }
+        }
+        private static string _cmsPath;
+
         static void Main(string[] args)
         {
             Func<Task> mainAsyncDelegate = MainAsync;
@@ -46,7 +61,8 @@ namespace CMSMessanger
                 if(input == DialogResult.Yes)
                 {
                     ProcessStartInfo cmsProcess = new ProcessStartInfo();
-                    cmsProcess.FileName = @"C:\Users\ddyrcz\Desktop\Programowanie\C#\Projects\CMS Release\CMS v1.0\Exe\CMS\CMS.exe";
+
+                    cmsProcess.FileName = CMSPath;
 
                     using (Process proc = Process.Start(cmsProcess))
                     {
