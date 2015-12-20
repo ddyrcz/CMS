@@ -33,9 +33,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>CMS-icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CMSDatabaseConnector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="CMSDatabaseConnector">
       <HintPath>..\..\..\CMSDatabaseConnector\CMSDatabaseConnector\CMSDatabaseConnector\bin\Debug\CMSDatabaseConnector.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
@@ -125,13 +127,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Common\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="logo1.png" />
+    <Resource Include="CMS-icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

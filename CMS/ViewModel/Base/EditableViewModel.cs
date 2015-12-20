@@ -15,9 +15,7 @@ namespace CMS.ViewModel.Base
 
         public void EditData()
         {
-            Mode selectedMode = SelectedMode;
-
-            switch (selectedMode)
+            switch (SelectedMode)
             {
                 case Mode.Add: CreateData();
                     break;
@@ -36,7 +34,7 @@ namespace CMS.ViewModel.Base
         abstract protected void RemoveData();
 
         /// <summary>
-        /// Indicates if there was any changes
+        /// Indicates if there are any changes
         /// </summary>
         public bool PendingChanges
         {
@@ -55,7 +53,7 @@ namespace CMS.ViewModel.Base
         private bool _pendingChanges = false;
 
         /// <summary>
-        /// Indicates if the selected mode allows to save data
+        /// Indicates if selected mode allows to save the data
         /// </summary>
         public bool CanSaveData
         {
@@ -68,7 +66,7 @@ namespace CMS.ViewModel.Base
         }
 
         /// <summary>
-        /// Indicates if editable mode is on
+        /// Indicates if editable mode is set on
         /// </summary>
         public bool IsEditable
         {
@@ -79,10 +77,7 @@ namespace CMS.ViewModel.Base
             }
         }
 
-        public virtual void InitData()
-        {
-
-        }
+        public virtual void InitData() { }
 
         /// <summary>
         /// Indicates if controls for editing are visible
@@ -92,7 +87,7 @@ namespace CMS.ViewModel.Base
             get
             {
                 return
-                    (SelectedMode == Mode.Edit ||SelectedMode == Mode.Add) ?
+                    (SelectedMode == Mode.Edit || SelectedMode == Mode.Add) ?
                     Visibility.Visible :
                     Visibility.Collapsed;
             }
@@ -134,7 +129,7 @@ namespace CMS.ViewModel.Base
             {
                 selectedModeChanged.Invoke(this, e);
             }
-        }        
+        }
 
         /// <summary>
         /// Better would be to set read mode as a default, but then there are some errors while reparing date pickers background
