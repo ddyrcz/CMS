@@ -1,7 +1,7 @@
 ﻿<Application x:Class="CMS.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="View/TrucksView.xaml">
+             StartupUri="View/CarsView.xaml">
     <Application.Resources>
          
     </Application.Resources>

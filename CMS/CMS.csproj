@@ -73,7 +73,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TrucksView.xaml">
+    <Page Include="View\CarsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -92,12 +92,12 @@
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Base\EditableViewModel.cs" />
     <Compile Include="ViewModel\StartupViewModel.cs" />
-    <Compile Include="ViewModel\TrucksViewModel.cs" />
+    <Compile Include="ViewModel\CarsViewModel.cs" />
     <Compile Include="View\StartupView.xaml.cs">
       <DependentUpon>StartupView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TrucksView.xaml.cs">
-      <DependentUpon>TrucksView.xaml</DependentUpon>
+    <Compile Include="View\CarsView.xaml.cs">
+      <DependentUpon>CarsView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -131,6 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="CMS-icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMSDatabaseAccess\CMSDatabaseAccess.csproj">
+      <Project>{ceeda4b6-9b92-43cf-a40a-0db574dcc2fe}</Project>
+      <Name>CMSDatabaseAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

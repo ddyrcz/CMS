@@ -10,31 +10,32 @@ using System.Diagnostics;
 using CMS.Common.Enums;
 using CMS.ViewModel.Base;
 using CMS.Common.Helpers;
+using System.Reflection;
 
 namespace CMS.ViewModel
 {
-    class TrucksViewModel : EditableViewModel
+    class CarsViewModel : EditableViewModel
     {
-        #region Trucks
+        #region Cars
 
-        public ObservableCollection<Car> Trucks
+        public ObservableCollection<Car> Cars
         {
             get
             {
-                return _trucks;
+                return _cars;
             }
             set
             {
-                if (_trucks != value)
+                if (_cars != value)
                 {
-                    _trucks = value;
+                    _cars = value;
                     OnPropertyChanged("Trucks");
                 }
             }
         }
-        private ObservableCollection<Car> _trucks;
+        private ObservableCollection<Car> _cars;
 
-        public Car SelectedTruck
+        public Car SelectedCar
         {
             get
             {
@@ -50,22 +51,20 @@ namespace CMS.ViewModel
                 }
             }
         }        
-
         private Car _selectedCar;
 
         #endregion
 
-        public TrucksViewModel()
+        public CarsViewModel()
         {
             
         }
 
         public override void InitData()
         {
-            Trucks = new ObservableCollection<Car>(Connector.GetAllCars());
+            Cars = new ObservableCollection<Car>(Connector.GetAllCars());
             base.SelectedModeChanged -= TrucksViewModel_SelectedModeChanged;
-            base.SelectedModeChanged += TrucksViewModel_SelectedModeChanged;
-
+            base.SelectedModeChanged += TrucksViewModel_SelectedModeChanged;            
         }
 
         void TrucksViewModel_SelectedModeChanged(object sender, SelectedModeEventArgs e)
@@ -75,7 +74,7 @@ namespace CMS.ViewModel
             if (e.SelectedMode == Mode.Add)
             {
                 _selectedCar = new Car();
-                OnPropertyChanged("SelectedTruck");
+                OnPropertyChanged("SelectedCar");
             }            
         }       
 
@@ -86,25 +85,25 @@ namespace CMS.ViewModel
 
         protected override void SaveData()
         {
-            if (SelectedTruck == null) return;
+            if (SelectedCar == null) return;
 
-            Connector.UpdateCar(SelectedTruck);
+            Connector.UpdateCar(SelectedCar);
         }
 
         protected override void CreateData()
         {
-            if (!CarValidator.Validate(SelectedTruck))
+            if (!CarValidator.Validate(SelectedCar))
             {
                 MessageBox.Show("Marka i numer rejestracyjny musi być podany.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            Connector.AddCar(SelectedTruck);
+            Connector.AddCar(SelectedCar);
         }
 
         protected override void RemoveData()
         {
-            Connector.RemoveCar(SelectedTruck.CarID);
+            Connector.RemoveCar(SelectedCar.CarID);
         }
 
         private Car GetSelectedCar(int carId)

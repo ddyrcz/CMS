@@ -62,17 +62,17 @@ namespace CMS
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (this.DataContext is TrucksViewModel)
+            if (this.DataContext is CarsViewModel)
             {
-                ((TrucksViewModel)this.DataContext).EditData();
+                ((CarsViewModel)this.DataContext).EditData();
             }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (this.DataContext is TrucksViewModel)
+            if (this.DataContext is CarsViewModel)
             {
-                ((TrucksViewModel)this.DataContext).InitData();
+                ((CarsViewModel)this.DataContext).InitData();
             }
         }
 
@@ -85,6 +85,11 @@ namespace CMS
             {
                 this.Close();
             }
+        }
+
+        private void Image_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

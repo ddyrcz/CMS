@@ -12,7 +12,7 @@
         WindowStyle="None">
 
     <Window.DataContext>
-        <viemodel:TrucksViewModel />
+        <viemodel:CarsViewModel />
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary Source="pack://application:,,,/CMS;component/Common/Resources/CommonResources.xaml" />
@@ -57,8 +57,8 @@
             <ListBox HorizontalContentAlignment="Stretch"
                      Background="#808080"
                      ItemTemplate="{StaticResource TruckItemTemplate}"
-                     ItemsSource="{Binding Trucks}"
-                     SelectedItem="{Binding SelectedTruck}" />
+                     ItemsSource="{Binding Cars}"
+                     SelectedItem="{Binding SelectedCar}" />
         </Border>
 
         <DockPanel Grid.Row="1"
@@ -211,12 +211,18 @@
                                         StringFormat=yyyy-MM-dd}"
                          Visibility="{Binding EditVisible,
                                               Converter={StaticResource OppositeVisibilityValueConverter}}" />
-                <DatePicker Name="OCDatePicker"
-                            Grid.Row="6"
+                <StackPanel Grid.Row="6"
                             Grid.Column="1"
-                            SelectedDate="{Binding SelectedTruck.OCPolicy}"
-                            Style="{StaticResource DetailControlStyle}"
-                            Visibility="{Binding EditVisible}" />
+                            Orientation="Horizontal">
+                    <DatePicker Name="OCDatePicker"
+                                SelectedDate="{Binding SelectedCar.OCPolicy}"
+                                Style="{StaticResource DetailControlStyle}"
+                                Visibility="{Binding EditVisible}" />
+                    <Image KeyDown="Image_KeyDown"
+                           Source="{StaticResource Percent}"
+                           ToolTip="{Binding SelectedCar.OCInsuranceToolTip}" />
+
+                </StackPanel>
 
                 <TextBlock Grid.Row="7"
                            Style="{StaticResource TextBlockStyle}"
