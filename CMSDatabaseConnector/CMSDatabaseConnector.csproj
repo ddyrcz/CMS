@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcInstallment.cs">
+      <DependentUpon>CMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Car.cs">
       <DependentUpon>CMSModel.tt</DependentUpon>
     </Compile>
@@ -70,6 +73,9 @@
     </Compile>
     <Compile Include="Connector.cs" />
     <Compile Include="Log.cs">
+      <DependentUpon>CMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OcInstallment.cs">
       <DependentUpon>CMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CMSModel.edmx.sql" />
+    <Content Include="Update scripts\UpdateScript_20160108.sql" />
     <Content Include="Update scripts\UpdateScript_20150920.sql" />
   </ItemGroup>
   <ItemGroup />

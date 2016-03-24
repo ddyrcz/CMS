@@ -17,8 +17,8 @@ namespace CMSDatabaseConnector
         /// <param name="newCar"></param>
         public static void AddCar(Car newCar)
         {
-            if (newCar == null) return;     
-                   
+            if (newCar == null) return;
+
             try
             {
                 using (CMSContext context = new CMSContext())
@@ -26,8 +26,8 @@ namespace CMSDatabaseConnector
                     int lastCarId = (
                         from car in context.Cars
                         orderby car.CarID descending
-                        select car.CarID).FirstOrDefault();  
-                                      
+                        select car.CarID).FirstOrDefault();
+
                     newCar.CarID = ++lastCarId;
 
                     context.Cars.Add(newCar);
@@ -155,7 +155,7 @@ namespace CMSDatabaseConnector
 
                     if (oldCar != null)
                     {
-                        // TODO: fond better solution
+                        // TODO: find better solution
                         CopyCarObject(modifiedCar, oldCar);
 
                         // ---throws exception---
@@ -176,7 +176,7 @@ namespace CMSDatabaseConnector
         /// <returns>True - connection succeed, False - connection failed</returns>
         public static bool TryConnectToDB()
         {
-            int count = 0;                   
+            int count = 0;
             while (true)
             {
                 try
@@ -189,10 +189,10 @@ namespace CMSDatabaseConnector
                 }
                 catch (Exception)
                 {
-                    if (++count > 20) return false;           
+                    if (++count > 20) return false;
                     Thread.Sleep(30000);
                 }
-            }            
+            }
         }
 
         private static void CopyCarObject(Car modifiedCar, Car oldCar)

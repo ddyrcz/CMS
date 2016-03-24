@@ -4,9 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e2bf7c795a9e4a58a453809832051304" Name="Diagram1">
+      <Diagram DiagramId="e2bf7c795a9e4a58a453809832051304" Name="Diagram1" ZoomLevel="92">
         <EntityTypeShape EntityType="CMSModel.Car" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.Log" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.Log" Width="1.5" PointX="4.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.OcInstallment" Width="1.5" PointX="4.75" PointY="0.5" />
+        <EntityTypeShape EntityType="CMSModel.AcInstallment" Width="1.5" PointX="7.375" PointY="0.625" />
+        <AssociationConnector Association="CMSModel.CarAcInstallment" />
+        <AssociationConnector Association="CMSModel.CarOcInstallment" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,12 @@ namespace CMSDatabaseConnector
     
     public partial class Car
     {
+        public Car()
+        {
+            this.AcInstallments = new HashSet<AcInstallment>();
+            this.OcInstallments = new HashSet<OcInstallment>();
+        }
+    
         public int CarID { get; set; }
         public string Brand { get; set; }
         public string RegistrationNumber { get; set; }
@@ -23,5 +29,8 @@ namespace CMSDatabaseConnector
         public Nullable<System.DateTime> LiftUDT { get; set; }
         public Nullable<System.DateTime> OCPolicy { get; set; }
         public Nullable<System.DateTime> ACPolicy { get; set; }
+    
+        public virtual ICollection<AcInstallment> AcInstallments { get; set; }
+        public virtual ICollection<OcInstallment> OcInstallments { get; set; }
     }
 }

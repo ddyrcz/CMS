@@ -28,5 +28,22 @@ namespace CMSDatabaseConnector
                     OCPolicy.HasValue && DateTime.Now.AddDays(_daysInDeathLine) > OCPolicy.Value;
             }
         }
+
+        public string OcInsurancesToolTip
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
+        public string AcInsurancesToolTip
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
     }
 }

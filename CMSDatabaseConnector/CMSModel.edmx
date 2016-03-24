@@ -7,7 +7,17 @@
     <Schema Namespace="CMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="CMSModelStoreContainer">
     <EntitySet Name="Cars" EntityType="CMSModel.Store.Cars" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Log" EntityType="CMSModel.Store.Log" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Logs" EntityType="CMSModel.Store.Logs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OcInstallment" EntityType="CMSModel.Store.OcInstallment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AcInstallment" EntityType="CMSModel.Store.AcInstallment" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CarAcInstallment" Association="CMSModel.Store.CarAcInstallment">
+      <End Role="Car" EntitySet="Cars" />
+      <End Role="AcInstallment" EntitySet="AcInstallment" />
+    </AssociationSet>
+    <AssociationSet Name="CarOcInstallment" Association="CMSModel.Store.CarOcInstallment">
+      <End Role="Car" EntitySet="Cars" />
+      <End Role="OcInstallment" EntitySet="OcInstallment" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cars">
     <Key>
@@ -23,13 +33,56 @@
     <Property Name="OCPolicy" Type="datetime" Nullable="true" />
     <Property Name="ACPolicy" Type="datetime" Nullable="true" />
   </EntityType>
-  <EntityType Name="Log">
+  <EntityType Name="Logs">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="StackTrace" Type="nvarchar" Nullable="false" MaxLength="200" />
   </EntityType>
+  <EntityType Name="OcInstallment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="CarID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AcInstallment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="CarID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CarAcInstallment">
+    <End Role="Car" Type="CMSModel.Store.Cars" Multiplicity="1" />
+    <End Role="AcInstallment" Type="CMSModel.Store.AcInstallment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="CarID" />
+      </Principal>
+      <Dependent Role="AcInstallment">
+        <PropertyRef Name="CarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CarOcInstallment">
+    <End Role="Car" Type="CMSModel.Store.Cars" Multiplicity="1" />
+    <End Role="OcInstallment" Type="CMSModel.Store.OcInstallment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="CarID" />
+      </Principal>
+      <Dependent Role="OcInstallment">
+        <PropertyRef Name="CarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -47,18 +100,75 @@
           <Property Name="LiftUDT" Type="DateTime" Precision="3" />
           <Property Name="OCPolicy" Type="DateTime" Precision="3" />
           <Property Name="ACPolicy" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AcInstallments" Relationship="CMSModel.CarAcInstallment" FromRole="Car" ToRole="AcInstallment" />
+          <NavigationProperty Name="OcInstallments" Relationship="CMSModel.CarOcInstallment" FromRole="Car" ToRole="OcInstallment" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StackTrace" Type="String" Nullable="false" MaxLength="200" />
         </EntityType>
         <EntityContainer Name="CMSContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cars" EntityType="Self.Car" />
-          <EntitySet Name="Log" EntityType="Self.Log" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="OcInstallment" EntityType="CMSModel.OcInstallment" />
+          <EntitySet Name="AcInstallment" EntityType="CMSModel.AcInstallment" />
+          <AssociationSet Name="CarAcInstallment" Association="CMSModel.CarAcInstallment">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="AcInstallment" EntitySet="AcInstallment" />
+          </AssociationSet>
+          <AssociationSet Name="CarOcInstallment" Association="CMSModel.CarOcInstallment">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="OcInstallment" EntitySet="OcInstallment" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="OcInstallment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="CMSModel.CarOcInstallment" FromRole="OcInstallment" ToRole="Car" />
+          <Property Name="CarID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AcInstallment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="CMSModel.CarAcInstallment" FromRole="AcInstallment" ToRole="Car" />
+          <Property Name="CarID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="CarAcInstallment">
+          <End Type="CMSModel.Car" Role="Car" Multiplicity="1" />
+          <End Type="CMSModel.AcInstallment" Role="AcInstallment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="AcInstallment">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CarOcInstallment">
+          <End Type="CMSModel.Car" Role="Car" Multiplicity="1" />
+          <End Type="CMSModel.OcInstallment" Role="OcInstallment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="OcInstallment">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -80,11 +190,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Log">
+    <EntitySetMapping Name="Logs">
       <EntityTypeMapping TypeName="IsTypeOf(CMSModel.Log)">
-        <MappingFragment StoreEntitySet="Log">
+        <MappingFragment StoreEntitySet="Logs">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OcInstallment">
+      <EntityTypeMapping TypeName="IsTypeOf(CMSModel.OcInstallment)">
+        <MappingFragment StoreEntitySet="OcInstallment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AcInstallment">
+      <EntityTypeMapping TypeName="IsTypeOf(CMSModel.AcInstallment)">
+        <MappingFragment StoreEntitySet="AcInstallment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

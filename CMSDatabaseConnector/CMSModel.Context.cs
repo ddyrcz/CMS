@@ -26,6 +26,8 @@ namespace CMSDatabaseConnector
         }
     
         public virtual DbSet<Car> Cars { get; set; }
-        public virtual DbSet<Log> Log { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<OcInstallment> OcInstallment { get; set; }
+        public virtual DbSet<AcInstallment> AcInstallment { get; set; }
     }
 }
