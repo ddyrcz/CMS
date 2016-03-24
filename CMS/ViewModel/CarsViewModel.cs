@@ -29,7 +29,7 @@ namespace CMS.ViewModel
                 if (_cars != value)
                 {
                     _cars = value;
-                    OnPropertyChanged("Trucks");
+                    OnPropertyChanged("Cars");
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace CMS.ViewModel
                 if (value != _selectedCar)
                 {
                     _selectedCar = GetSelectedCar(value != null ? value.CarID : -1);
-                    OnPropertyChanged("SelectedTruck");
+                    OnPropertyChanged("SelectedCar");
                     OnSelectedTruckChanged();
                 }
             }

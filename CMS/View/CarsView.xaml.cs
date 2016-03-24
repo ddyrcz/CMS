@@ -85,9 +85,14 @@ namespace CMS
             {
                 this.Close();
             }
+        }        
+
+        private void OCInstallment_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
 
-        private void Image_KeyDown(object sender, KeyEventArgs e)
+        private void ACInstallment_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
         }

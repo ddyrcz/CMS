@@ -69,6 +69,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\InstallmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StartupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,8 +95,12 @@
     <Compile Include="Common\Helpers\CarValidator.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Base\EditableViewModel.cs" />
+    <Compile Include="ViewModel\InstallmentsViewModel.cs" />
     <Compile Include="ViewModel\StartupViewModel.cs" />
     <Compile Include="ViewModel\CarsViewModel.cs" />
+    <Compile Include="View\InstallmentsView.xaml.cs">
+      <DependentUpon>InstallmentsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StartupView.xaml.cs">
       <DependentUpon>StartupView.xaml</DependentUpon>
     </Compile>

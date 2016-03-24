@@ -3,7 +3,7 @@
                     xmlns:converters="clr-namespace:CMS.Common.Converters">
 
     <BitmapImage x:Key="Logo" UriSource="c:\logo.png" />
-    <BitmapImage x:Key="Percent" UriSource="c:\Percent.png" />
+    <BitmapImage x:Key="Percent" UriSource="c:\Percent1.png" />
     <converters:ModeToBooleanConverter x:Key="ModeToBooleanConverter" />
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:BoolToBrushConverter x:Key="BoolToBrushConverter" />

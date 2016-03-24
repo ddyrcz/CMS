@@ -118,7 +118,7 @@
                          IsReadOnly="{Binding IsEditable,
                                               Converter={StaticResource OppositeBoolValueConverter}}"
                          Style="{StaticResource DetailControlStyle}"
-                         Text="{Binding SelectedTruck.Brand}" />
+                         Text="{Binding SelectedCar.Brand}" />
 
                 <TextBlock Grid.Row="1"
                            Style="{StaticResource TextBlockStyle}"
@@ -128,7 +128,7 @@
                          IsReadOnly="{Binding IsEditable,
                                               Converter={StaticResource OppositeBoolValueConverter}}"
                          Style="{StaticResource DetailControlStyle}"
-                         Text="{Binding SelectedTruck.RegistrationNumber}" />
+                         Text="{Binding SelectedCar.RegistrationNumber}" />
 
                 <Image Grid.Row="1"
                        Grid.RowSpan="6"
@@ -144,7 +144,7 @@
                          IsReadOnly="{Binding IsEditable,
                                               Converter={StaticResource OppositeBoolValueConverter}}"
                          Style="{StaticResource DetailControlStyle}"
-                         Text="{Binding SelectedTruck.VIN_Number}" />
+                         Text="{Binding SelectedCar.VIN_Number}" />
 
                 <TextBlock Grid.Row="3"
                            Style="{StaticResource TextBlockStyle}"
@@ -153,14 +153,14 @@
                          Grid.Column="1"
                          IsReadOnly="True"
                          Style="{StaticResource DetailControlStyle}"
-                         Text="{Binding SelectedTruck.TermTechnicalResearch,
+                         Text="{Binding SelectedCar.TermTechnicalResearch,
                                         StringFormat=yyyy-MM-dd}"
                          Visibility="{Binding EditVisible,
                                               Converter={StaticResource OppositeVisibilityValueConverter}}" />
                 <DatePicker Name="TechnicalResearchDatePicker"
                             Grid.Row="3"
                             Grid.Column="1"
-                            SelectedDate="{Binding SelectedTruck.TermTechnicalResearch}"
+                            SelectedDate="{Binding SelectedCar.TermTechnicalResearch}"
                             Style="{StaticResource DetailControlStyle}"
                             Visibility="{Binding EditVisible}" />
 
@@ -171,14 +171,14 @@
                          Grid.Column="1"
                          IsReadOnly="True"
                          Style="{StaticResource DetailControlStyle}"
-                         Text="{Binding SelectedTruck.TechLegalization,
+                         Text="{Binding SelectedCar.TechLegalization,
                                         StringFormat=yyyy-MM-dd}"
                          Visibility="{Binding EditVisible,
                                               Converter={StaticResource OppositeVisibilityValueConverter}}" />
                 <DatePicker Name="TachoLegalizationDatePicker"
                             Grid.Row="4"
                             Grid.Column="1"
-                            SelectedDate="{Binding SelectedTruck.TechLegalization}"
+                            SelectedDate="{Binding SelectedCar.TechLegalization}"
                             Style="{StaticResource DetailControlStyle}"
                             Visibility="{Binding EditVisible}" />
 
@@ -189,14 +189,14 @@
                          Grid.Column="1"
                          IsReadOnly="True"
                          Style="{StaticResource DetailControlStyle}"
-                         Text="{Binding SelectedTruck.LiftUDT,
+                         Text="{Binding SelectedCar.LiftUDT,
                                         StringFormat=yyyy-MM-dd}"
                          Visibility="{Binding EditVisible,
                                               Converter={StaticResource OppositeVisibilityValueConverter}}" />
                 <DatePicker Name="LiftUDTDatePicker"
                             Grid.Row="5"
                             Grid.Column="1"
-                            SelectedDate="{Binding SelectedTruck.LiftUDT}"
+                            SelectedDate="{Binding SelectedCar.LiftUDT}"
                             Style="{StaticResource DetailControlStyle}"
                             Visibility="{Binding EditVisible}" />
 
@@ -207,22 +207,27 @@
                          Grid.Column="1"
                          IsReadOnly="True"
                          Style="{StaticResource DetailControlStyle}"
-                         Text="{Binding SelectedTruck.OCPolicy,
+                         Text="{Binding SelectedCar.OCPolicy,
                                         StringFormat=yyyy-MM-dd}"
                          Visibility="{Binding EditVisible,
                                               Converter={StaticResource OppositeVisibilityValueConverter}}" />
-                <StackPanel Grid.Row="6"
-                            Grid.Column="1"
-                            Orientation="Horizontal">
+                <Grid Grid.Row="6"
+                      Grid.Column="1"
+                      Visibility="{Binding EditVisible}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
                     <DatePicker Name="OCDatePicker"
                                 SelectedDate="{Binding SelectedCar.OCPolicy}"
-                                Style="{StaticResource DetailControlStyle}"
-                                Visibility="{Binding EditVisible}" />
-                    <Image KeyDown="Image_KeyDown"
+                                Style="{StaticResource DetailControlStyle}" />
+                    <Image Grid.Column="1"
+                           DockPanel.Dock="Right"
+                           MouseDown="OCInstallment_MouseDown"
                            Source="{StaticResource Percent}"
                            ToolTip="{Binding SelectedCar.OCInsuranceToolTip}" />
+                </Grid>
 
-                </StackPanel>
 
                 <TextBlock Grid.Row="7"
                            Style="{StaticResource TextBlockStyle}"
@@ -231,16 +236,26 @@
                          Grid.Column="1"
                          IsReadOnly="True"
                          Style="{StaticResource DetailControlStyle}"
-                         Text="{Binding SelectedTruck.ACPolicy,
+                         Text="{Binding SelectedCar.ACPolicy,
                                         StringFormat=yyyy-MM-dd}"
                          Visibility="{Binding EditVisible,
                                               Converter={StaticResource OppositeVisibilityValueConverter}}" />
-                <DatePicker Name="ACDatePicker"
-                            Grid.Row="7"
-                            Grid.Column="1"
-                            SelectedDate="{Binding SelectedTruck.ACPolicy}"
-                            Style="{StaticResource DetailControlStyle}"
-                            Visibility="{Binding EditVisible}" />
+                <Grid Grid.Row="7"
+                      Grid.Column="1"
+                      Visibility="{Binding EditVisible}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <DatePicker Name="ACDatePicker"
+                                SelectedDate="{Binding SelectedCar.ACPolicy}"
+                                Style="{StaticResource DetailControlStyle}" />
+                    <Image Grid.Column="1"
+                           DockPanel.Dock="Right"
+                           MouseDown="ACInstallment_MouseDown"
+                           Source="{StaticResource Percent}"
+                           ToolTip="{Binding SelectedCar.OCInsuranceToolTip}" />
+                </Grid>
 
                 <Button Grid.Row="7"
                         Grid.Column="2"
