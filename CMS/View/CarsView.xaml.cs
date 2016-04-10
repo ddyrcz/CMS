@@ -27,7 +27,8 @@ namespace CMS
         public MainWindow()
         {
             InitializeComponent();
-
+            var window = new Window();
+            
             FixDatePickersBackground();
         }
 
@@ -89,12 +90,14 @@ namespace CMS
 
         private void OCInstallment_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            CMS.View.WindowManager window = new View.WindowManager(new UserControl());
+            window.Show();
         }
 
         private void ACInstallment_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            CMS.View.WindowManager window = new View.WindowManager(new UserControl());
+            window.Show();
         }
     }
 }
