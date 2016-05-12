@@ -90,14 +90,14 @@ namespace CMS
 
         private void OCInstallment_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            CMS.View.WindowManager window = new View.WindowManager(new UserControl());
-            window.Show();
+            CMS.View.InstallmentsView window = new View.InstallmentsView();
+            window.ShowDialog();
         }
 
         private void ACInstallment_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            CMS.View.WindowManager window = new View.WindowManager(new UserControl());
-            window.Show();
+            CMS.View.InstallmentsView window = new View.InstallmentsView();
+            window.ShowDialog();
         }
     }
 }

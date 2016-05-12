@@ -18,7 +18,7 @@ namespace CMS.View
     /// <summary>
     /// Interaction logic for InstallmentsView.xaml
     /// </summary>
-    public partial class InstallmentsView : UserControl
+    public partial class InstallmentsView : Window
     {
         public InstallmentsView()
         {
