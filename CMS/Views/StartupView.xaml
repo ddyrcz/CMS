@@ -1,7 +1,7 @@
-﻿<Window x:Class="CMS.View.StartupView"
+﻿<Window x:Class="CMS.Views.StartupView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:viemodel="clr-namespace:CMS.ViewModel"
+        xmlns:viemodel="clr-namespace:CMS.ViewModels"
         Title="StartupView" Height="300" Width="300">
     <Window.DataContext>
         <viemodel:StartupViewModel />

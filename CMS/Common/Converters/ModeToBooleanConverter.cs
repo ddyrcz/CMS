@@ -1,5 +1,5 @@
 ﻿using CMS.Common.Enums;
-using CMS.ViewModel;
+using CMS.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

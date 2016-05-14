@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using CMSDatabaseConnector;
 using System.Windows;
-using System.Diagnostics;
 using CMS.Common.Enums;
-using CMS.ViewModel.Base;
+using CMS.ViewModels.Base;
 using CMS.Common.Helpers;
-using System.Reflection;
 
-namespace CMS.ViewModel
+namespace CMS.ViewModels
 {
     class CarsViewModel : EditableViewModel
     {
@@ -29,7 +22,7 @@ namespace CMS.ViewModel
                 if (_cars != value)
                 {
                     _cars = value;
-                    OnPropertyChanged("Cars");
+                    NotifyOfPropertyChange();
                 }
             }
         }
@@ -46,37 +39,37 @@ namespace CMS.ViewModel
                 if (value != _selectedCar)
                 {
                     _selectedCar = GetSelectedCar(value != null ? value.CarID : -1);
-                    OnPropertyChanged("SelectedCar");
+                    NotifyOfPropertyChange();
                     OnSelectedTruckChanged();
                 }
             }
-        }        
+        }
         private Car _selectedCar;
 
         #endregion
 
         public CarsViewModel()
         {
-            
+
         }
 
         public override void InitData()
         {
             Cars = new ObservableCollection<Car>(Connector.GetAllCars());
             base.SelectedModeChanged -= TrucksViewModel_SelectedModeChanged;
-            base.SelectedModeChanged += TrucksViewModel_SelectedModeChanged;            
+            base.SelectedModeChanged += TrucksViewModel_SelectedModeChanged;
         }
 
         void TrucksViewModel_SelectedModeChanged(object sender, SelectedModeEventArgs e)
         {
-            if (e == null) return;            
+            if (e == null) return;
 
             if (e.SelectedMode == Mode.Add)
             {
                 _selectedCar = new Car();
-                OnPropertyChanged("SelectedCar");
-            }            
-        }       
+                NotifyOfPropertyChange(() => SelectedCar);
+            }
+        }
 
         private void OnSelectedTruckChanged()
         {
@@ -111,6 +104,15 @@ namespace CMS.ViewModel
             if (carId < 0) return null;
 
             return Connector.GetSelectedCar(carId);
-        }        
+        }
+
+        public void ManageOCInstallments()
+        {
+        }
+
+        public void ManageACInstallemnts()
+        {
+
+        }
     }
 }

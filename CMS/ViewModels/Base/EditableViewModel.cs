@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CMS.ViewModel.Base
+namespace CMS.ViewModels.Base
 {
     abstract class EditableViewModel : BaseViewModel
     {
@@ -17,9 +17,11 @@ namespace CMS.ViewModel.Base
         {
             switch (SelectedMode)
             {
-                case Mode.Add: CreateData();
+                case Mode.Add:
+                    CreateData();
                     break;
-                case Mode.Edit: SaveData();
+                case Mode.Edit:
+                    SaveData();
                     break;
                 default: return;
             }
@@ -79,6 +81,11 @@ namespace CMS.ViewModel.Base
 
         public virtual void InitData() { }
 
+        public void WindowLoaded()
+        {
+            InitData();
+        }
+
         /// <summary>
         /// Indicates if controls for editing are visible
         /// </summary>
@@ -104,10 +111,10 @@ namespace CMS.ViewModel.Base
             set
             {
                 _selectedMode = value;
-                OnPropertyChanged("SelectedMode");
-                OnPropertyChanged("CanSaveData");
-                OnPropertyChanged("EditVisible");
-                OnPropertyChanged("IsEditable");
+                NotifyOfPropertyChange(() => SelectedMode);
+                NotifyOfPropertyChange(() => CanSaveData);
+                NotifyOfPropertyChange(() => EditVisible);
+                NotifyOfPropertyChange(() => IsEditable);
                 OnSelectedModeChanged(new SelectedModeEventArgs(value));
 
                 if (value == Mode.Remove)

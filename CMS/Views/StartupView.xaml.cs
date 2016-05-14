@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CMS.View
+namespace CMS.Views
 {
     /// <summary>
-    /// Interaction logic for InstallmentsView.xaml
+    /// Interaction logic for StartupView.xaml
     /// </summary>
-    public partial class InstallmentsView : Window
+    public partial class StartupView : Window
     {
-        public InstallmentsView()
+        public StartupView()
         {
             InitializeComponent();
         }
