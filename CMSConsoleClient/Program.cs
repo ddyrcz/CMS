@@ -4,14 +4,69 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CMSDatabaseConnector;
+using System.Reflection;
+using System.IO;
 
 namespace CMSConsoleClient
 {
     class Program
     {
+        class ScheduleObject
+        {
+            public static int InstancesCount { get { return _instanceCount; } }
+            private static int _instanceCount;
+
+            public ScheduleObject()
+            {
+                _instanceCount++;
+            }
+
+            ~ScheduleObject()
+            {
+                _instanceCount--;
+            }            
+        }
+
         static void Main(string[] args)
         {
-            ManageInput(PrintMenu());
+            int instancesCount = ScheduleObject.InstancesCount;
+            
+            ScheduleObject so = new ScheduleObject();
+
+
+            //CMSDatabaseAccess.DatabaseAccess da = new CMSDatabaseAccess.DatabaseAccess();
+
+            //List<CMSDatabaseAccess.Models.CarModel> cars = da.GetAllCars();
+
+            //ManageInput(PrintMenu());
+
+            TryGetFileContent();
+
+            GC.Collect();
+            System.Threading.Thread.Sleep(3000);
+
+            instancesCount = ScheduleObject.InstancesCount;
+        }
+
+        private static void TryGetFileContent()
+        {
+            //byte[] content;
+
+            //using (ServiceReference.CommonServiceClient svc = new ServiceReference.CommonServiceClient())
+            //{
+            //    content = svc.GetFileContent("CMS.exe");
+            //}
+
+            //string dicPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+
+            //string newFilePath = Path.Combine(dicPath, "CMS.exe");
+            //File.Create(newFilePath);
+
+            //File.WriteAllBytes(newFilePath, content);
+
+            ScheduleObject so = new ScheduleObject();
+
+            int i = ScheduleObject.InstancesCount;
         }
 
         private static int PrintMenu()
@@ -27,6 +82,11 @@ namespace CMSConsoleClient
         private static void ManageInput(int input)
         {
             if (input == 0) return;
+
+            List<int> numbers = new List<int>{ 1, 4, 6, 22, 36, 100 };
+
+            var num = numbers.Where(x => x > 6);
+            var num1 = num.FirstOrDefault();
 
             switch (input)
             {
