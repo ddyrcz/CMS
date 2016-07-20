@@ -33,15 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CMSDatabaseConnector">
-      <HintPath>..\..\..\CMSDatabaseConnector\CMSDatabaseConnector\CMSDatabaseConnector\bin\Debug\CMSDatabaseConnector.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\..\CMSDatabaseConnector\CMSDatabaseConnector\CMSDatabaseConnector\bin\Debug\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\..\CMSDatabaseConnector\CMSDatabaseConnector\CMSDatabaseConnector\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
@@ -112,6 +103,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMSDatabaseConnector\CMSDatabaseConnector.csproj">
+      <Project>{be397979-8b0d-45c1-8182-f54d51b1816a}</Project>
+      <Name>CMSDatabaseConnector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/24/2016 19:20:57
--- Generated from EDMX file: C:\Users\ddyrcz\Desktop\Programowanie\C#\Projects\CMS Delelopment\CMSDatabaseConnector\CMSDatabaseConnector\CMSDatabaseConnector\CMSModel.edmx
+-- Date Created: 07/20/2016 14:46:33
+-- Generated from EDMX file: C:\Users\ddyrcz\Source\Repos\CMS\CMSDatabaseConnector\CMSModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,6 +17,12 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_CarAcInstallment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AcInstallment] DROP CONSTRAINT [FK_CarAcInstallment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CarOcInstallment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OcInstallment] DROP CONSTRAINT [FK_CarOcInstallment];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -27,6 +33,12 @@ IF OBJECT_ID(N'[dbo].[Cars]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Logs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Logs];
+GO
+IF OBJECT_ID(N'[dbo].[OcInstallment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OcInstallment];
+GO
+IF OBJECT_ID(N'[dbo].[AcInstallment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AcInstallment];
 GO
 
 -- --------------------------------------------------
